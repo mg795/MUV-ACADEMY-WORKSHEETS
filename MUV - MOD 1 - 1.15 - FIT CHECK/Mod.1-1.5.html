@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit Check: Can We Prove It? - Muvist Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f0f0f0;
+            color: #1a1a1a;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            position: relative;
+            padding: 30px;
+            min-height: 140px;
+        }
+
+        .module-badge {
+            position: absolute;
+            left: 0;
+            top: 30px;
+            background: #b6141c;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 15px 25px 15px 20px;
+            border-radius: 0 25px 25px 0;
+        }
+
+        .header-tagline {
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: left;
+            white-space: nowrap;
+            line-height: 1;
+            padding-left: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .title-section {
+            margin-top: 115px;
+            text-align: left;
+        }
+
+        .title-section h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #809364;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        .header-icon {
+            height: 48px;
+            width: auto;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: #4a4a4a;
+            margin-bottom: -40px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .intro-text {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .intro-text strong {
+            font-weight: 700;
+        }
+
+        .info-box {
+            background: #f9f9f7;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            line-height: 1.6;
+        }
+
+        .info-box img {
+            height: 26px;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .section-header img {
+            height: 44px;
+            width: auto;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #809364;
+            margin: 0;
+        }
+
+        .section-intro {
+            margin: 0 0 20px 0;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        /* Claims Audit Table */
+        .claims-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .claims-table thead {
+            background: #f9f9f7;
+        }
+
+        .claims-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            color: #809364;
+            border: 1px solid #d0d0d0;
+        }
+
+        .claims-table td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            vertical-align: top;
+        }
+
+        .claims-table input[type="text"],
+        .claims-table textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .claims-table textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .claims-table input[type="text"]:focus,
+        .claims-table textarea:focus {
+            outline: none;
+            border-color: #809364;
+        }
+
+        .verdict-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .verdict-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .verdict-options input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* Ethics Checkboxes - Grid Layout */
+        .ethics-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .ethics-item {
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .ethics-item:hover {
+            border-color: #809364;
+        }
+
+        .ethics-item-content {
+            padding: 15px;
+        }
+
+        .ethics-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .ethics-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .ethics-item .ethics-title {
+            font-weight: 700;
+            color: #809364;
+            font-size: 14px;
+        }
+
+        .ethics-item .ethics-description {
+            color: #4a4a4a;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            padding-left: 0;
+        }
+
+        /* Authenticity Rating - Checkbox Grid */
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .rating-option {
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .rating-option:hover {
+            border-color: #809364;
+        }
+
+        .rating-option-content {
+            padding: 15px;
+        }
+
+        .rating-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .rating-header input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .rating-header strong {
+            color: #809364;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .rating-option p {
+            font-size: 13px;
+            font-weight: 400;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin: 0;
+            padding-left: 0;
+        }
+
+        /* Belief Statement */
+        .belief-statement {
+            margin-top: 20px;
+        }
+
+        .belief-prompt {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #809364;
+        }
+
+        .belief-statement textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            resize: vertical;
+        }
+
+        .belief-statement textarea:focus {
+            outline: none;
+            border-color: #809364;
+        }
+
+        /* Gaps Table */
+        .gaps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .gaps-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            color: #809364;
+            border: 1px solid #d0d0d0;
+            background: #f9f9f7;
+        }
+
+        .gaps-table td {
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            vertical-align: top;
+        }
+
+        .gaps-table textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            resize: vertical;
+        }
+
+        .gaps-table textarea:focus {
+            outline: none;
+            border-color: #809364;
+        }
+
+        /* Final Note Box */
+        .final-note {
+            background: #f9f9f7;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .final-note strong {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            color: #809364;
+            font-size: 14px;
+        }
+
+        .final-note p {
+            margin: 0;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        /* Actions */
+        .actions {
+            padding: 20px 30px;
+            background: #f9f9f7;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .actions button {
+            padding: 12px 24px;
+            border: 1px solid #b3bf8f;
+            background: white;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .actions button:hover {
+            background: #f5f5f5;
+            border-color: #b3bf8f;
+        }
+
+        .actions button.primary {
+            background: #b3bf8f;
+            color: white;
+            border-color: #b3bf8f;
+        }
+
+        .actions button.primary:hover {
+            background: #9faa7a;
+            border-color: #9faa7a;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            background: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-graphic {
+            height: 52.5px;
+            width: auto;
+        }
+
+        .footer-copyright {
+            font-size: 10px;
+            color: #666;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a1a1a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .rating-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ethics-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header-tagline {
+                font-size: 11px;
+            }
+
+            .module-badge {
+                font-size: 14px;
+                padding: 12px 20px 12px 15px;
+            }
+
+            .title-section h1 {
+                font-size: 24px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .actions button {
+                width: 100%;
+            }
+
+            .claims-table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="module-badge">Mod.1-1.5</div>
+            <div class="header-tagline">Movement Marketing: Extend Reach, Reduce Cost.</div>
+            <div class="logo">
+                <img src="form-top-logo.png" alt="Muvist Academy">
+            </div>
+            <div class="title-section">
+                <h1><img src="form-arrow-icon.png" alt="" class="header-icon">Fit Check: Can We Prove It?</h1>
+                <p class="subtitle">Verify that every claim in your movement story is authentic and evidence-based</p>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="intro-text">
+                <strong>Why this matters:</strong> Movements that grow by giving are built on trust. If a claim in your story is vague, overstated or cannot be backed up, it will eventually unravel your reputation. This worksheet helps you audit authenticity and credibility before you scale. It applies to any type of organisation: charity, social enterprise, SME or purpose-led business. Work through it with someone willing to ask difficult questions. Your answers here feed directly into your Movement Story in Module 2.
+            </div>
+
+            <div class="info-box">
+                <img src="form-arrow-icon.png" alt="">
+                <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer or member.</p>
+            </div>
+
+            <!-- Section 1: Claims Audit -->
+            <div class="section">
+                <div class="section-header">
+                    <img src="form-arrow-icon.png" alt="">
+                    <h2>1. Claims Audit: What Are You Saying?</h2>
+                </div>
+                <div class="section-intro">
+                    List up to four claims your organisation currently makes or plans to make. For each claim, choose a verdict and note the evidence that supports it. Be specific: 'we help people' is not a claim, it is a category.
+                </div>
+
+                <table class="claims-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">The Claim</th>
+                            <th style="width: 25%;">Evidence You Can Name</th>
+                            <th style="width: 20%;">Verdict</th>
+                            <th style="width: 30%;">If Thin/Overclaim: What Needs to Be Built?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><textarea id="claim1" placeholder="Enter your first claim..."></textarea></td>
+                            <td><textarea id="evidence1" placeholder="List specific evidence..."></textarea></td>
+                            <td>
+                                <div class="verdict-options">
+                                    <label><input type="radio" name="verdict1" value="provable"> Provable</label>
+                                    <label><input type="radio" name="verdict1" value="thin"> Thin</label>
+                                    <label><input type="radio" name="verdict1" value="overclaim"> Overclaim</label>
+                                </div>
+                            </td>
+                            <td><textarea id="build1" placeholder="What needs to be built?"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><textarea id="claim2" placeholder="Enter your second claim..."></textarea></td>
+                            <td><textarea id="evidence2" placeholder="List specific evidence..."></textarea></td>
+                            <td>
+                                <div class="verdict-options">
+                                    <label><input type="radio" name="verdict2" value="provable"> Provable</label>
+                                    <label><input type="radio" name="verdict2" value="thin"> Thin</label>
+                                    <label><input type="radio" name="verdict2" value="overclaim"> Overclaim</label>
+                                </div>
+                            </td>
+                            <td><textarea id="build2" placeholder="What needs to be built?"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><textarea id="claim3" placeholder="Enter your third claim..."></textarea></td>
+                            <td><textarea id="evidence3" placeholder="List specific evidence..."></textarea></td>
+                            <td>
+                                <div class="verdict-options">
+                                    <label><input type="radio" name="verdict3" value="provable"> Provable</label>
+                                    <label><input type="radio" name="verdict3" value="thin"> Thin</label>
+                                    <label><input type="radio" name="verdict3" value="overclaim"> Overclaim</label>
+                                </div>
+                            </td>
+                            <td><textarea id="build3" placeholder="What needs to be built?"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><textarea id="claim4" placeholder="Enter your fourth claim..."></textarea></td>
+                            <td><textarea id="evidence4" placeholder="List specific evidence..."></textarea></td>
+                            <td>
+                                <div class="verdict-options">
+                                    <label><input type="radio" name="verdict4" value="provable"> Provable</label>
+                                    <label><input type="radio" name="verdict4" value="thin"> Thin</label>
+                                    <label><input type="radio" name="verdict4" value="overclaim"> Overclaim</label>
+                                </div>
+                            </td>
+                            <td><textarea id="build4" placeholder="What needs to be built?"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 2: Ethics and Credibility Check -->
+            <div class="section">
+                <div class="section-header">
+                    <img src="form-arrow-icon.png" alt="">
+                    <h2>2. Ethics and Credibility Check</h2>
+                </div>
+                <div class="section-intro">
+                    Answer each question honestly. A 'No' is not a failure: it is a gap to address before you build.
+                </div>
+
+                <div class="ethics-list">
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="consent" name="ethics" value="consent">
+                                <strong class="ethics-title">Consent</strong>
+                            </div>
+                            <p class="ethics-description">Do the people in your stories know they are being used and have agreed?</p>
+                        </div>
+                    </div>
+
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="accuracy" name="ethics" value="accuracy">
+                                <strong class="ethics-title">Accuracy</strong>
+                            </div>
+                            <p class="ethics-description">Are your impact numbers independently verified or clearly estimated?</p>
+                        </div>
+                    </div>
+
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="recency" name="ethics" value="recency">
+                                <strong class="ethics-title">Recency</strong>
+                            </div>
+                            <p class="ethics-description">Is all evidence from the last 18 months? Nothing out of date presented as current?</p>
+                        </div>
+                    </div>
+
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="balance" name="ethics" value="balance">
+                                <strong class="ethics-title">Balance</strong>
+                            </div>
+                            <p class="ethics-description">Does your story acknowledge what has not yet worked as well as what has?</p>
+                        </div>
+                    </div>
+
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="specificity" name="ethics" value="specificity">
+                                <strong class="ethics-title">Specificity</strong>
+                            </div>
+                            <p class="ethics-description">Can you name real people, real places and real outcomes rather than general categories?</p>
+                        </div>
+                    </div>
+
+                    <div class="ethics-item">
+                        <div class="ethics-item-content">
+                            <div class="ethics-header">
+                                <input type="checkbox" id="repeatability" name="ethics" value="repeatability">
+                                <strong class="ethics-title">Repeatability</strong>
+                            </div>
+                            <p class="ethics-description">Would a supporter/prospect be comfortable repeating this claim to someone they know?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Authenticity Rating -->
+            <div class="section">
+                <div class="section-header">
+                    <img src="form-arrow-icon.png" alt="">
+                    <h2>3. Authenticity Rating</h2>
+                </div>
+                <div class="section-intro">
+                    Based on your Claims Audit and Ethics Check above, give your overall authenticity an honest rating. Tick one.
+                </div>
+
+                <div class="rating-grid">
+                    <div class="rating-option" onclick="toggleRating('green')">
+                        <div class="rating-option-content">
+                            <div class="rating-header">
+                                <input type="checkbox" id="rating-green" name="rating" value="green" onclick="event.stopPropagation(); toggleRating('green')">
+                                <strong>Green: Scale It</strong>
+                            </div>
+                            <p>All claims are provable, evidence is recent and people have given consent. Your story is ready to travel. Move on to building your Movement Story in Module 2.</p>
+                        </div>
+                    </div>
+
+                    <div class="rating-option" onclick="toggleRating('amber')">
+                        <div class="rating-option-content">
+                            <div class="rating-header">
+                                <input type="checkbox" id="rating-amber" name="rating" value="amber" onclick="event.stopPropagation(); toggleRating('amber')">
+                                <strong>Amber: Build Proof First</strong>
+                            </div>
+                            <p>One or two claims are thin. Evidence gaps exist. Set a 60-day plan to gather case studies, get consent or commission a simple evaluation before you scale the story.</p>
+                        </div>
+                    </div>
+
+                    <div class="rating-option" onclick="toggleRating('red')">
+                        <div class="rating-option-content">
+                            <div class="rating-header">
+                                <input type="checkbox" id="rating-red" name="rating" value="red" onclick="event.stopPropagation(); toggleRating('red')">
+                                <strong>Red: Change the Claim</strong>
+                            </div>
+                            <p>One or more claims are overclaims or lack any evidence. Rewrite the claim or remove it. A smaller, honest story outperforms a big, fragile one every time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Your Belief Statement -->
+            <div class="section">
+                <div class="section-header">
+                    <img src="form-arrow-icon.png" alt="">
+                    <h2>4. Your Belief Statement</h2>
+                </div>
+                <div class="section-intro">
+                    A Belief Statement is the one thing you know to be true that drives all your work. It is not your mission statement and not a goal: it is a conviction about the world. Complete the sentence below. Keep it to one or two lines. You will use this as the foundation of your Movement Story in Lesson 2.1.
+                </div>
+
+                <div class="belief-statement">
+                    <div class="belief-prompt">"We believe that ...</div>
+                    <textarea id="belief" placeholder="Complete your belief statement here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 5: Gaps and Next Actions -->
+            <div class="section">
+                <div class="section-header">
+                    <img src="form-arrow-icon.png" alt="">
+                    <h2>5. Gaps and Next Actions</h2>
+                </div>
+
+                <table class="gaps-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Gaps in Proof or Ethics</th>
+                            <th style="width: 50%;">Actions to Close Each Gap (with dates)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><textarea id="gaps" placeholder="List any gaps you've identified..."></textarea></td>
+                            <td><textarea id="actions" placeholder="Specific actions with target dates..."></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Final Note -->
+            <div class="final-note">
+                <strong>Before You Move to Module 2</strong>
+                <p>Your Belief Statement and your Claims Audit results are the raw material for your Movement Story in Lesson 2.1. Bring this worksheet with you. Every claim you make in Module 2 should pass the Fit Check you have just completed here.</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button type="button" onclick="clearForm()">Clear Form</button>
+            <button type="button" class="primary" onclick="saveWorksheet()">Save Your Worksheet</button>
+            <button type="button" onclick="downloadPDF()">Download PDF</button>
+            <button type="button" onclick="window.print()">Print</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <img src="form-footer-graphic.png" alt="" class="footer-graphic">
+            </div>
+            <div class="footer-copyright">
+                © 2026 MUVIST Ltd. All rights reserved. MUVIST® is a registered trademark of MUVIST Ltd. Course materials are the intellectual property of Paula Lain and Marshall Gill and may be reproduced by enrolled organisations for internal use only.
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- html2pdf library for PDF download -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        // Auto-save functionality
+        const formFields = [
+            'claim1', 'evidence1', 'build1',
+            'claim2', 'evidence2', 'build2',
+            'claim3', 'evidence3', 'build3',
+            'claim4', 'evidence4', 'build4',
+            'belief', 'gaps', 'actions'
+        ];
+
+        const checkboxFields = ['consent', 'accuracy', 'recency', 'balance', 'specificity', 'repeatability'];
+        const radioGroups = ['verdict1', 'verdict2', 'verdict3', 'verdict4'];
+
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Load text fields
+            formFields.forEach(field => {
+                const savedValue = localStorage.getItem(`muvist-form-fitcheck-${field}`);
+                if (savedValue) {
+                    const element = document.getElementById(field);
+                    if (element) element.value = savedValue;
+                }
+            });
+
+            // Load checkboxes
+            checkboxFields.forEach(field => {
+                const savedValue = localStorage.getItem(`muvist-form-fitcheck-${field}`);
+                if (savedValue === 'true') {
+                    const element = document.getElementById(field);
+                    if (element) element.checked = true;
+                }
+            });
+
+            // Load radio buttons
+            radioGroups.forEach(group => {
+                const savedValue = localStorage.getItem(`muvist-form-fitcheck-${group}`);
+                if (savedValue) {
+                    const radios = document.getElementsByName(group);
+                    radios.forEach(radio => {
+                        if (radio.value === savedValue) radio.checked = true;
+                    });
+                }
+            });
+
+            // Load rating
+            const savedRating = localStorage.getItem('muvist-form-fitcheck-rating');
+            if (savedRating) {
+                const ratingCheckbox = document.getElementById(`rating-${savedRating}`);
+                if (ratingCheckbox) ratingCheckbox.checked = true;
+            }
+        });
+
+        // Save on blur for text fields
+        formFields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element) {
+                element.addEventListener('blur', function() {
+                    localStorage.setItem(`muvist-form-fitcheck-${field}`, this.value);
+                });
+            }
+        });
+
+        // Save on change for checkboxes
+        checkboxFields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element) {
+                element.addEventListener('change', function() {
+                    localStorage.setItem(`muvist-form-fitcheck-${field}`, this.checked);
+                });
+            }
+        });
+
+        // Save on change for radio buttons
+        radioGroups.forEach(group => {
+            const radios = document.getElementsByName(group);
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem(`muvist-form-fitcheck-${group}`, this.value);
+                    }
+                });
+            });
+        });
+
+        // Toggle rating (single selection)
+        function toggleRating(value) {
+            const checkboxes = ['rating-green', 'rating-amber', 'rating-red'];
+            checkboxes.forEach(id => {
+                document.getElementById(id).checked = false;
+            });
+            
+            document.getElementById(`rating-${value}`).checked = true;
+            localStorage.setItem('muvist-form-fitcheck-rating', value);
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Clear form
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form data? This cannot be undone.')) {
+                // Clear all localStorage items for this form
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('muvist-form-fitcheck-')) {
+                        localStorage.removeItem(key);
+                    }
+                });
+                
+                // Reload page to reset form
+                location.reload();
+            }
+        }
+
+        // Save worksheet
+        function saveWorksheet() {
+            // Data is already auto-saved
+            showToast('Your worksheet has been saved!');
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const element = document.querySelector('.page');
+            const opt = {
+                margin: 10,
+                filename: 'Fit-Check-Worksheet.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                

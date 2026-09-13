@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Check: Is This Right For Us? - Muvist Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f5f0;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 850px;
+            margin: 30px auto;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Header matching PDF */
+        .header {
+            background: white;
+            padding: 35px 30px 0 30px;
+            position: relative;
+        }
+
+        .module-badge {
+            position: absolute;
+            left: 0;
+            top: 50px;
+            background: #b6141c;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .logo {
+            position: absolute;
+            right: 30px;
+            top: 50px;
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .header-tagline {
+            position: absolute;
+            left: 30px;
+            top: 32px;
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .title-section {
+            margin-top: 130px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #809364;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header-icon {
+            height: 48px;
+            width: auto;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #4a4a4a;
+            font-weight: 600;
+            margin-left: 62px;
+        }
+
+        /* Info boxes */
+        .info-section {
+            padding: 25px 30px 25px 30px;
+            background: white;
+        }
+
+        .info-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f9f9f7;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .info-box h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Main content */
+        .content {
+            padding: 0 30px 0 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            margin-bottom: 5px;
+            padding-bottom: 0;
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #809364;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            height: 44px;
+            width: auto;
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-field .hint {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #d0d0d0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-bottom-color: #4ecdc4;
+        }
+
+        /* Quadrants */
+        .instruction-text {
+            font-size: 13px;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .instruction-text strong {
+            color: #1a1a1a;
+        }
+
+        .quadrants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .quadrant {
+            background: white;
+            border: 1px solid #d0d0d0;
+            padding: 0;
+            border-radius: 4px;
+        }
+
+        .quadrant-header {
+            background: #f9f9f7;
+            padding: 12px 15px;
+            border-bottom: 1px solid #d0d0d0;
+        }
+
+        .quadrant-number {
+            font-size: 13px;
+            font-weight: 700;
+            color: #809364;
+            margin-bottom: 8px;
+        }
+
+        .quadrant h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #809364;
+            margin-bottom: 10px;
+        }
+
+        .quadrant .hint {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .quadrant-content {
+            padding: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 0;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            line-height: 1.6;
+            resize: vertical;
+            background: transparent;
+            color: #1a1a1a;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        /* Signal Strength Check */
+        .signal-table {
+            margin: 20px 0;
+        }
+
+        .signal-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: end;
+        }
+
+        .signal-row:last-child {
+            border-bottom: none;
+        }
+
+        .signal-row:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .signal-label {
+            font-size: 13px;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .signal-label strong {
+            color: #809364;
+            font-weight: 700;
+            display: block;
+            margin-bottom: -2px;
+            line-height: 1.2;
+        }
+
+        .signal-rating {
+            font-size: 13px;
+            font-weight: 400;
+            color: #1a1a1a;
+            white-space: nowrap;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding-bottom: 0;
+        }
+
+        .rating-input {
+            width: 40px;
+            text-align: center;
+            padding: 4px;
+            border: none;
+            border-bottom: 1px solid #1a1a1a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            background: transparent;
+        }
+
+        .rating-input:focus {
+            outline: none;
+            border-bottom: 2px solid #809364;
+        }
+
+        .total-row {
+            background: #f9f9f7;
+            font-weight: 700;
+            margin-top: 0;
+            border-top: 2px solid #809364;
+            padding-top: 12px;
+        }
+
+        .total-row .signal-label {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .scoring-guide {
+            background: #f9f9f7;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .scoring-guide strong {
+            color: #809364;
+        }
+
+        /* Verdict Section */
+        .verdict-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .verdict-option {
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .verdict-option:hover {
+            border-color: #809364;
+        }
+
+        .verdict-content {
+            padding: 15px;
+        }
+
+        .verdict-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .verdict-header input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .verdict-header strong {
+            color: #809364;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .verdict-content p {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 400;
+            padding-left: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-graphic {
+            height: 53px;
+            width: auto;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Action buttons */
+        .actions {
+            padding: 20px 30px;
+            background: #f9f9f7;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: 1px solid #b3bf8f;
+            background: white;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #f5f5f5;
+            border-color: #b3bf8f;
+        }
+
+        button.primary {
+            background: #b3bf8f;
+            color: white;
+            border-color: #b3bf8f;
+        }
+
+        button.primary:hover {
+            background: #9faa7a;
+            border-color: #9faa7a;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a1a1a;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+            .actions, .toast {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                margin: 0;
+            }
+
+            .header,
+            .info-section,
+            .content,
+            .actions,
+            .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .module-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 20px;
+                border-radius: 30px;
+            }
+
+            .logo {
+                position: static;
+                margin-top: 20px;
+                height: 28px;
+            }
+
+            .info-boxes,
+            .quadrants,
+            .verdict-options {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .signal-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .signal-label {
+                max-width: 100%;
+            }
+
+            .signal-rating {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="module-badge">Mod.1-1.3</div>
+            <div class="header-tagline">Movement Marketing: Extend Reach, Reduce Cost.</div>
+            <div class="logo">
+                <img src="form-top-logo.png" alt="Muvist Academy">
+            </div>
+            <div class="title-section">
+                <div>
+                    <h1><img src="form-arrow-icon.png" alt="" class="header-icon">Quick Check: Is This Right For Us?</h1>
+                    <p class="subtitle">A structured 30-minute self-audit before you commit to building a movement.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info boxes -->
+        <div class="info-section">
+            <div class="info-boxes">
+                <div class="info-box">
+                    <h3>Before you start:</h3>
+                    <p>This worksheet is designed for any type of organisation – charity, social enterprise, SME or purpose‑led business. Use 'organisation' throughout unless your shorthand feels clearer. Work through this with at least one other person who will push back on your thinking.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Important note:</h3>
+                    <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer, or member.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main form -->
+        <form id="auditForm">
+            <div class="content">
+                <!-- Organisation in one line -->
+                <div class="section">
+                    <div class="section-title">
+                        <h2><img src="form-arrow-icon.png" alt="" class="section-icon">Your Organisation in One Line</h2>
+                    </div>
+                    <div class="form-field">
+                        <label>Who you are, who you serve and why it matters. One sentence only:</label>
+                        <input 
+                            type="text" 
+                            name="orgDescription"
+                            placeholder="Type your answer here..."
+                        >
+                    </div>
+                </div>
+
+                <!-- Four Quadrants -->
+                <div class="section">
+                    <div class="section-title">
+                        <h2><img src="form-arrow-icon.png" alt="" class="section-icon">The Readiness Audit: Four Quadrants</h2>
+                    </div>
+                    
+                    <p class="instruction-text">Write brief honest answers in each quadrant. 'I think so' is not an answer. Aim for specific examples.</p>
+
+                    <div class="quadrants">
+                        <!-- Quadrant 1 -->
+                        <div class="quadrant">
+                            <div class="quadrant-header">
+                                <div class="quadrant-number">1) People & Relationships</div>
+                                <p class="hint">Who is already with you? Who believes in what you do but has not been asked to take a bigger role yet? Name individuals if you can, not just "our supporters or prospects."</p>
+                            </div>
+                            <div class="quadrant-content">
+                                <textarea 
+                                    name="peopleRelationships"
+                                    placeholder="Write your answer here..."
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Quadrant 2 -->
+                        <div class="quadrant">
+                            <div class="quadrant-header">
+                                <div class="quadrant-number">2) Stories You Can Tell</div>
+                                <p class="hint">What has already happened because of your work? Not impact statistics: a real story with a real person and a real change. Could you tell it in two minutes without looking at a screen?</p>
+                            </div>
+                            <div class="quadrant-content">
+                                <textarea 
+                                    name="stories"
+                                    placeholder="Write your answer here..."
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Quadrant 3 -->
+                        <div class="quadrant">
+                            <div class="quadrant-header">
+                                <div class="quadrant-number">3) Partners & Connectors</div>
+                                <p class="hint">Who already trusts you enough to introduce you to others? Name organisations, venues, media contacts or individuals who could amplify your work if asked in the right way.</p>
+                            </div>
+                            <div class="quadrant-content">
+                                <textarea 
+                                    name="partners"
+                                    placeholder="Write your answer here..."
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Quadrant 4 -->
+                        <div class="quadrant">
+                            <div class="quadrant-header">
+                                <div class="quadrant-number">4) Habits & Rituals</div>
+                                <p class="hint">What do people already do repeatedly because of your organisation? Events, conversations, content, traditions? Movements build on existing habits, not invented ones.</p>
+                            </div>
+                            <div class="quadrant-content">
+                                <textarea 
+                                    name="habits"
+                                    placeholder="Write your answer here..."
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signal Strength Check Section -->
+                <div class="section">
+                    <div class="section-title">
+                        <h2><img src="form-arrow-icon.png" alt="" class="section-icon">Signal Strength Check</h2>
+                    </div>
+                    
+                    <p class="instruction-text">Rate each signal honestly from 1 (weak or absent) to 5 (clear and proven). Base your rating on evidence you can name, not gut feeling.</p>
+
+                    <div class="signal-table">
+                        <div class="signal-row">
+                            <div class="signal-label">
+                                <strong>Belief</strong><br>
+                                Do supporters/prospects repeat your values in their own words?
+                            </div>
+                            <div class="signal-rating">
+                                Rating: <input type="text" name="beliefRating" class="rating-input" maxlength="1" placeholder="_"> /5
+                            </div>
+                        </div>
+
+                        <div class="signal-row">
+                            <div class="signal-label">
+                                <strong>Story</strong><br>
+                                Can someone describe what you do without your brochure?
+                            </div>
+                            <div class="signal-rating">
+                                Rating: <input type="text" name="storyRating" class="rating-input" maxlength="1" placeholder="_"> /5
+                            </div>
+                        </div>
+
+                        <div class="signal-row">
+                            <div class="signal-label">
+                                <strong>Trust</strong><br>
+                                Do partners open doors for you without being asked?
+                            </div>
+                            <div class="signal-rating">
+                                Rating: <input type="text" name="trustRating" class="rating-input" maxlength="1" placeholder="_"> /5
+                            </div>
+                        </div>
+
+                        <div class="signal-row">
+                            <div class="signal-label">
+                                <strong>Habit</strong><br>
+                                Do people return or engage without prompting?
+                            </div>
+                            <div class="signal-rating">
+                                Rating: <input type="text" name="habitRating" class="rating-input" maxlength="1" placeholder="_"> /5
+                            </div>
+                        </div>
+
+                        <div class="signal-row">
+                            <div class="signal-label">
+                                <strong>Invitation</strong><br>
+                                Do people bring others in because they want to?
+                            </div>
+                            <div class="signal-rating">
+                                Rating: <input type="text" name="invitationRating" class="rating-input" maxlength="1" placeholder="_"> /5
+                            </div>
+                        </div>
+
+                        <div class="signal-row total-row">
+                            <div class="signal-label"><strong>Total</strong></div>
+                            <div class="signal-rating">
+                                Total: <input type="text" name="totalRating" class="rating-input" maxlength="2" placeholder="__" readonly> /25
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scoring-guide">
+                        <strong>18 to 25:</strong> Strong foundation. Ready to build.  |  <strong>10 to 17:</strong> Partial readiness. Address your weakest signal first.  |  <strong>Under 10:</strong> Build the basics before the movement.
+                    </div>
+                </div>
+
+                <!-- Verdict Section -->
+                <div class="section">
+                    <div class="section-title">
+                        <h2><img src="form-arrow-icon.png" alt="" class="section-icon">Verdict</h2>
+                    </div>
+                    
+                    <p class="instruction-text">Tick the verdict that best reflects your honest assessment after completing Sections 1 and 2.</p>
+
+                    <div class="verdict-options">
+                        <div class="verdict-option">
+                            <div class="verdict-content">
+                                <div class="verdict-header">
+                                    <input type="checkbox" name="verdict" value="ready">
+                                    <strong>Ready to Build</strong>
+                                </div>
+                                <p>Three or more quadrants have specific named examples and your Signal Strength total is 18 or above. Proceed to Lesson 1.4.</p>
+                            </div>
+                        </div>
+
+                        <div class="verdict-option">
+                            <div class="verdict-content">
+                                <div class="verdict-header">
+                                    <input type="checkbox" name="verdict" value="nearly">
+                                    <strong>Nearly There</strong>
+                                </div>
+                                <p>Two quadrants are strong and total is 10 to 17. Identify your weakest signal and set a 30-day target before revisiting this check.</p>
+                            </div>
+                        </div>
+
+                        <div class="verdict-option">
+                            <div class="verdict-content">
+                                <div class="verdict-header">
+                                    <input type="checkbox" name="verdict" value="notyet">
+                                    <strong>Not Yet</strong>
+                                </div>
+                                <p>Fewer than two strong quadrants or total under 10. Revisit Module 1 Lesson 1.2 and build the foundation first. This is not failure: it is the most useful answer you can give yourself right now.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button type="button" onclick="clearForm()">
+                    Clear Form
+                </button>
+                <button type="button" class="primary" onclick="saveAudit()">
+                    Save Your Audit
+                </button>
+                <button type="button" onclick="downloadPDF()">
+                    Download PDF
+                </button>
+                <button type="button" onclick="printAudit()">
+                    Print
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-content">
+                    <img src="form-footer-graphic.png" alt="Learn Growth Through Giving" class="footer-graphic">
+                </div>
+                <div class="footer-copyright">
+                    © 2026 MUVIST Ltd. All rights reserved. MUVIST® is a registered trademark of MUVIST Ltd. Course materials are the intellectual property of Paula Lain and Marshall Gill and may be reproduced by enrolled organisations for internal use only.
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Saved!</span>
+    </div>
+
+    <script>
+        // Auto-save functionality
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                const formData = new FormData(document.getElementById('auditForm'));
+                const data = Object.fromEntries(formData);
+                localStorage.setItem('movementAudit', JSON.stringify(data));
+            });
+        });
+
+        // Auto-calculate Signal Strength total
+        function calculateTotal() {
+            const ratings = [
+                'beliefRating',
+                'storyRating',
+                'trustRating',
+                'habitRating',
+                'invitationRating'
+            ];
+            
+            let total = 0;
+            let allFilled = true;
+            
+            ratings.forEach(ratingName => {
+                const input = document.querySelector(`input[name="${ratingName}"]`);
+                const value = parseInt(input.value) || 0;
+                if (input.value === '') {
+                    allFilled = false;
+                }
+                total += value;
+            });
+            
+            const totalInput = document.querySelector('input[name="totalRating"]');
+            if (allFilled) {
+                totalInput.value = total;
+            } else {
+                totalInput.value = '';
+            }
+        }
+
+        // Add event listeners to rating inputs
+        document.querySelectorAll('.rating-input').forEach(input => {
+            if (input.name !== 'totalRating') {
+                input.addEventListener('input', function() {
+                    // Only allow numbers 1-5
+                    if (this.value && (this.value < 1 || this.value > 5 || isNaN(this.value))) {
+                        this.value = '';
+                    }
+                    calculateTotal();
+                });
+            }
+        });
+
+        // Load saved data on page load
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('movementAudit');
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(key => {
+                    const input = document.querySelector(`[name="${key}"]`);
+                    if (input) {
+                        input.value = data[key];
+                    }
+                });
+            }
+        });
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function saveAudit() {
+            const formData = new FormData(document.getElementById('auditForm'));
+            const data = Object.fromEntries(formData);
+            
+            // Save to localStorage
+            localStorage.setItem('movementAudit', JSON.stringify(data));
+            
+            // Create downloadable JSON
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'movement-readiness-audit.json';
+            link.click();
+            
+            showToast('Audit saved and downloaded!');
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form data?')) {
+                document.getElementById('auditForm').reset();
+                localStorage.removeItem('movementAudit');
+                showToast('Form cleared');
+            }
+        }
+
+        function printAudit() {
+            window.print();
+        }
+
+        function downloadPDF() {
+            // Get the page element
+            const element = document.querySelector('.page');
+            
+            // Hide the action buttons before generating PDF
+            const actions = document.querySelector('.actions');
+            actions.style.display = 'none';
+            
+            // Configure PDF options
+            const opt = {
+                margin: 10,
+                filename: 'movement-readiness-audit.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Generate PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Show buttons again after PDF is generated
+                actions.style.display = 'flex';
+                showToast('PDF downloaded successfully!');
+            });
+        }
+    </script>
+</body>
+</html>

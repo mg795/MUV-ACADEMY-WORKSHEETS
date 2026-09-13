@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Baseline Tracker - Muvist Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #e5e5e5;
+            color: #1a1a1a;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .header {
+            position: relative;
+            padding: 30px 30px 15px 30px;
+        }
+
+        .module-badge {
+            position: absolute;
+            left: 0;
+            top: 30px;
+            background: #b6141c;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 15px 25px 15px 20px;
+            border-radius: 0 25px 25px 0;
+        }
+
+        .header-tagline {
+            position: absolute;
+            left: 30px;
+            top: 5px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: left;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .logo {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .title-section {
+            margin-top: 98px;
+            text-align: left;
+        }
+
+        .title-section h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #809364;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        .header-icon {
+            height: 48px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        .org-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f7;
+            border-radius: 4px;
+        }
+
+        .org-info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .org-info-field label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #809364;
+            text-transform: uppercase;
+        }
+
+        .org-info-field input {
+            padding: 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+        }
+
+        .content {
+            padding: 15px 30px 15px 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            border-bottom: 2px solid #809364;
+            margin-bottom: 15px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a4a4a;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: #809364;
+        }
+
+        .tab.active {
+            color: #809364;
+            border-bottom-color: #809364;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section-icon {
+            height: 44px;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #809364;
+        }
+
+        .info-box {
+            background: #f9f9f7;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .info-box-bullet {
+            padding-left: 10px;
+            text-indent: -10px;
+            margin-bottom: 8px;
+        }
+
+        .info-box strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .info-box-icon {
+            height: 26px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .metric-grid {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: end;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .metric-label strong {
+            color: #809364;
+            font-weight: 700;
+            display: block;
+            margin-bottom: -2px;
+            line-height: 1.2;
+        }
+
+        .metric-input {
+            font-size: 13px;
+            font-weight: 400;
+            white-space: nowrap;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding-bottom: 0;
+        }
+
+        .metric-input input,
+        .metric-input textarea {
+            padding: 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .metric-input input:focus,
+        .metric-input textarea:focus {
+            outline: none;
+            border-color: #809364;
+        }
+
+        .metric-input input[type="number"] {
+            width: 100px;
+            text-align: center;
+        }
+
+        .metric-input input[type="text"] {
+            width: 250px;
+        }
+
+        .metric-input textarea {
+            width: 250px;
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .category-header {
+            background: #809364;
+            color: white;
+            padding: 10px 15px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .category-header:first-child {
+            margin-top: 15px;
+        }
+
+        .weekly-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .weekly-table th {
+            background: #809364;
+            color: white;
+            padding: 10px 8px;
+            font-weight: 700;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .weekly-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .weekly-table input {
+            width: 80px;
+            padding: 6px;
+            border: 1px solid #d0d0d0;
+            border-radius: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .weekly-table input:focus {
+            outline: none;
+            border-color: #809364;
+        }
+
+        .weekly-table .metric-name {
+            font-weight: 600;
+            color: #1a1a1a;
+            min-width: 200px;
+        }
+
+        .weekly-table .category-row {
+            background: #f9f9f7;
+        }
+
+        .weekly-table .category-row td {
+            font-weight: 700;
+            color: #809364;
+            padding: 12px 8px;
+            font-size: 13px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card h3 {
+            color: #809364;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-metric {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .dashboard-metric.dashboard-header {
+            font-weight: 700;
+            color: #809364;
+            background: #f9f9f7;
+            padding: 12px;
+            margin: -5px -5px 10px -5px;
+            border-radius: 4px;
+            border-bottom: 2px solid #809364;
+        }
+
+        .dashboard-metric.dashboard-header .trend {
+            font-size: 13px;
+        }
+
+        .dashboard-metric:last-child {
+            border-bottom: none;
+        }
+
+        .dashboard-metric .metric-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .dashboard-metric .value {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .dashboard-metric .change {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .dashboard-metric .change.positive {
+            color: #4a9d5f;
+        }
+
+        .dashboard-metric .change.negative {
+            color: #b6141c;
+        }
+
+        .dashboard-metric .trend {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .kpi-menu-grid {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .kpi-menu-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 3fr;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 2px solid #809364;
+            align-items: start;
+            font-size: 13px;
+        }
+
+        .kpi-menu-header > div {
+            text-align: center;
+        }
+
+        .kpi-menu-header .header-label {
+            font-weight: 700;
+            color: #809364;
+        }
+
+        .kpi-menu-header .header-sublabel {
+            font-size: 12px;
+            color: #4a4a4a;
+            font-weight: 400;
+        }
+
+        .kpi-menu-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 3fr;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: start;
+            font-size: 13px;
+        }
+
+        .kpi-menu-row:last-child {
+            border-bottom: none;
+        }
+
+        .kpi-menu-row .metric-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .kpi-menu-row .priority {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .kpi-menu-row .priority.priority-1 {
+            color: #b6141c;
+            font-weight: 700;
+        }
+
+        .kpi-menu-row .priority.priority-2 {
+            color: #809364;
+            font-weight: 700;
+        }
+
+        .kpi-menu-row .priority.priority-3 {
+            color: #888;
+        }
+
+        .kpi-menu-row .why {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .actions {
+            margin-top: 5px;
+            padding: 20px 30px;
+            background: #f9f9f7;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: 1px solid #b3bf8f;
+            background: white;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #f5f5f5;
+            border-color: #b3bf8f;
+        }
+
+        button.primary {
+            background: #b3bf8f;
+            color: white;
+            border-color: #b3bf8f;
+        }
+
+        button.primary:hover {
+            background: #9faa7a;
+            border-color: #9faa7a;
+        }
+
+        .footer {
+            padding: 20px;
+            background: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .footer-graphic {
+            height: 52.5px;
+            width: auto;
+        }
+
+        .footer-copyright {
+            font-size: 10px;
+            color: #666;
+            line-height: 1.5;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1a1a1a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .org-info {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .weekly-table {
+                font-size: 10px;
+            }
+
+            .weekly-table input {
+                width: 60px;
+            }
+
+            .dashboard-metric {
+                grid-template-columns: 1fr;
+                text-align: left !important;
+            }
+
+            .kpi-menu-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="module-badge">Mod.1-1.4</div>
+            <div class="header-tagline">Movement Marketing: Extend Reach, Reduce Cost.</div>
+            <div class="logo">
+                <img src="form-top-logo.png" alt="Muvist Academy" onerror="this.style.display='none'">
+            </div>
+            <div class="title-section">
+                <h1>
+                    <img src="form-arrow-icon.png" alt="" class="header-icon" onerror="this.style.display='none'">
+                    KPI Baseline Tracker
+                </h1>
+                <p class="subtitle">Set your Day 0 baselines before any movement-building activity begins.</p>
+                
+                <div class="org-info">
+                    <div class="org-info-field">
+                        <label>Organisation Name</label>
+                        <input type="text" id="org-name" placeholder="Enter organisation name">
+                    </div>
+                    <div class="org-info-field">
+                        <label>Campaign Name</label>
+                        <input type="text" id="org-type" placeholder="Enter campaign name">
+                    </div>
+                    <div class="org-info-field">
+                        <label>Date Started</label>
+                        <input type="date" id="date-started">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="overview">Overview</button>
+                <button class="tab" data-tab="baseline">Baseline Metrics</button>
+                <button class="tab" data-tab="weekly">Weekly Tracker</button>
+                <button class="tab" data-tab="dashboard">Dashboard</button>
+                <button class="tab" data-tab="kpi-menu">KPI Menu</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="section">
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> Workbook Contents</strong><br><br>
+                        <strong>Baseline Metrics:</strong> Record your Day 0 numbers before any activity.<br><br>
+                        <strong>Weekly Tracker:</strong> 8‑week self‑paced log. Start as soon as you finish Module 1.<br><br>
+                        <strong>Dashboard:</strong> Auto‑updating summary with simple trend indicators from the Weekly Tracker.<br><br>
+                        <strong>KPI Menu:</strong> Menu of suggested KPIs by organisation type to help you choose what to track first.
+                    </div>
+
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> Important Notes</strong><br><br>
+                        <div class="info-box-bullet">• Complete your Baseline Metrics before you start any new movement‑building activity.</div>
+                        <div class="info-box-bullet">• Use the KPI Menu to confirm you are tracking the right metrics for your organisation type and stage.</div>
+                        <div class="info-box-bullet">• Choose 3 KPIs to focus on in your first 30 days, then add more from Week 5 onwards if you have capacity.</div>
+                        <div class="info-box-bullet">• The Weekly Tracker is an 8‑week log. Update it at least once a week while you work through the course and run your 30‑day campaign. It is fine if your 8 weeks run past the end of the course – the point is to see before and after movement, not to be perfect.</div>
+                        <div class="info-box-bullet">• The Dashboard reads everything from your Weekly Tracker automatically. Do not type into the Dashboard sheet directly.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baseline Metrics Tab -->
+            <div class="tab-content" id="baseline">
+                <div class="section">
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> Before you start</strong><br>
+                        Complete this sheet BEFORE any movement-building activity. Every metric here becomes a comparison point in your Weekly Tracker.
+                    </div>
+
+                    <div class="category-header">REACH AND AWARENESS</div>
+                    <div class="metric-grid">
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Total email list or newsletter subscribers</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-email-subs" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Total social media followers (all channels combined)</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-social-followers" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Monthly website sessions or unique visitors</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-website-sessions" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Estimated total addressable audience</strong>
+                                Local population, sector reach or market size
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-addressable-audience" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">ENGAGEMENT</div>
+                    <div class="metric-grid">
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Email open rate</strong>
+                                Last 3 months average
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-email-open-rate" placeholder="%">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Social engagement rate</strong>
+                                Likes, shares, comments per post average
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-social-engagement" placeholder="%">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Average event or activity attendance</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-event-attendance" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Supporters or customers who engage at least monthly</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-monthly-active" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">CONVERSION AND ACTION</div>
+                    <div class="metric-grid">
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Total active supporters or customers</strong>
+                                Engaged in last 90 days
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-active-total" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>New supporters or customers in last 30 days</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-new-30days" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Conversion rate: enquiry or interest to first action</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-conversion-rate" placeholder="%">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Repeat action rate</strong>
+                                Supporters or customers who returned within 90 days
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-repeat-rate" placeholder="%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">STORY AND ADVOCACY</div>
+                    <div class="metric-grid">
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Number of people who have shared your story unprompted</strong>
+                                Last 30 days
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-story-shares" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Number of referrals or introductions</strong>
+                                Brought in by existing supporters or customers
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-referrals" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">
+                                <strong>Number of active advocates or champions you can name</strong>
+                            </div>
+                            <div class="metric-input">
+                                <input type="text" id="baseline-advocates" placeholder="Number, % or text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Tracker Tab -->
+            <div class="tab-content" id="weekly">
+                <div class="section">
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> Weekly Tracker Instructions</strong><br>
+                        Update whenever you can - weekly works well. Start as soon as you finish Module 1 and keep going at your own pace. The 8 weeks give you space to build while you are still learning and then run your 30‑day campaign. When your campaign is live, use this tracker to fill in the Day 7, 14, 21 and 30 milestone section in your Campaign Plan.
+                    </div>
+
+                    <div class="scroll-container">
+                        <table class="weekly-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Week 1</th>
+                                    <th>Week 2</th>
+                                    <th>Week 3</th>
+                                    <th>Week 4</th>
+                                    <th>Week 5</th>
+                                    <th>Week 6</th>
+                                    <th>Week 7</th>
+                                    <th>Week 8</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="category-row">
+                                    <td colspan="9">REACH</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Email subscribers</td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-subs" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Social followers (total)</td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-followers" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Monthly website sessions</td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="website-sessions" data-week="8"></td>
+                                </tr>
+
+                                <tr class="category-row">
+                                    <td colspan="9">ENGAGEMENT</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Email open rate</td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="email-open-rate" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Social engagement rate</td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="social-engagement" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Event or activity attendance</td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="event-attendance" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Monthly active supporters/customers</td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="monthly-active" data-week="8"></td>
+                                </tr>
+
+                                <tr class="category-row">
+                                    <td colspan="9">CONVERSION</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">New supporters/customers this week</td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="new-weekly" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Repeat action rate</td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="repeat-rate" data-week="8"></td>
+                                </tr>
+
+                                <tr class="category-row">
+                                    <td colspan="9">STORY AND ADVOCACY</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Story shares/referrals this week</td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="story-shares" data-week="8"></td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-name">Active advocates/champions</td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="1"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="2"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="3"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="4"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="5"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="6"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="7"></td>
+                                    <td><input type="text" class="weekly-input" data-metric="advocates" data-week="8"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div class="tab-content" id="dashboard">
+                <div class="section">
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> Dashboard</strong><br><br>
+                        • This dashboard reads from your Weekly Tracker automatically. Changes and trends are calculated based on Week 1 vs Week 8.<br>
+                        • Do not type into the Dashboard directly – all data comes from your Weekly Tracker.<br>
+                        • The Weekly Tracker is an 8‑week log. Update it at least once a week while you work through the course and run your 30‑day campaign.<br>
+                        • It is fine if your 8 weeks run past the end of the course – the point is to see before and after movement, not to be perfect.
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>At-a-Glance Progress Summary</h3>
+                        <div id="dashboard-content">
+                            <!-- Content will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Menu Tab -->
+            <div class="tab-content" id="kpi-menu">
+                <div class="section">
+                    <div class="info-box">
+                        <strong><img src="form-arrow-icon.png" alt="" class="info-box-icon" onerror="this.style.display='none'"> KPI Selection Guide</strong><br>
+                        Choose 3 KPIs to track in your first 30 days. Focus beats completeness. Add more from Week 5 onwards.
+                    </div>
+
+                    <div class="category-header">REACH AND AWARENESS</div>
+                    <div class="kpi-menu-grid">
+                        <div class="kpi-menu-header">
+                            <div></div>
+                            <div>
+                                <div class="header-label">SME Priority</div>
+                                <div class="header-sublabel">Small and Medium Enterprises</div>
+                            </div>
+                            <div>
+                                <div class="header-label">Charity Priority</div>
+                                <div class="header-sublabel">Charities and Social Enterprises</div>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Email subscribers</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="why">Steady list growth shows your story is spreading. Essential for conversion.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Social followers (total)</div>
+                            <div class="priority priority-3">Priority 3</div>
+                            <div class="priority priority-3">Priority 3</div>
+                            <div class="why">Vanity metric unless paired with engagement. Use as context, not a primary KPI.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Monthly website sessions</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="priority priority-3">Priority 3</div>
+                            <div class="why">Shows organic interest. Useful once you have a clear call to action on your site.</div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">ENGAGEMENT</div>
+                    <div class="kpi-menu-grid">
+                        <div class="kpi-menu-header">
+                            <div></div>
+                            <div>
+                                <div class="header-label">SME Priority</div>
+                                <div class="header-sublabel">Small and Medium Enterprises</div>
+                            </div>
+                            <div>
+                                <div class="header-label">Charity Priority</div>
+                                <div class="header-sublabel">Charities and Social Enterprises</div>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Email open rate</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">The clearest signal of whether your story is relevant. Below 20 percent: your subject line or list is the problem.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Social engagement rate</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="why">Shares and comments matter more than likes. Track the ratio, not the total.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Event or activity attendance</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">For organisations that run events or in-person experiences, this is the most direct readiness signal.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Monthly active supporters or customers</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">The most meaningful engagement figure. Passives do not build movements.</div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">CONVERSION AND ACTION</div>
+                    <div class="kpi-menu-grid">
+                        <div class="kpi-menu-header">
+                            <div></div>
+                            <div>
+                                <div class="header-label">SME Priority</div>
+                                <div class="header-sublabel">Small and Medium Enterprises</div>
+                            </div>
+                            <div>
+                                <div class="header-label">Charity Priority</div>
+                                <div class="header-sublabel">Charities and Social Enterprises</div>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">New supporters or customers per week</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="why">Week-on-week growth tells you whether your invitation is working.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Conversion rate: interest to first action</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">The most direct measure of story and invitation effectiveness.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Repeat action rate</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">Movements are built on repeat behaviour. Single-action engagement is not a movement.</div>
+                        </div>
+                    </div>
+
+                    <div class="category-header">STORY AND ADVOCACY</div>
+                    <div class="kpi-menu-grid">
+                        <div class="kpi-menu-header">
+                            <div></div>
+                            <div>
+                                <div class="header-label">SME Priority</div>
+                                <div class="header-sublabel">Small and Medium Enterprises</div>
+                            </div>
+                            <div>
+                                <div class="header-label">Charity Priority</div>
+                                <div class="header-sublabel">Charities and Social Enterprises</div>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Story shares or referrals per week</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">Your single most important long-term metric. Organic sharing reduces acquisition cost permanently.</div>
+                        </div>
+                        <div class="kpi-menu-row">
+                            <div class="metric-name">Active advocates or champions</div>
+                            <div class="priority priority-2">Priority 2</div>
+                            <div class="priority priority-1">Priority 1</div>
+                            <div class="why">Organisations with referral or volunteer models should track this from Day 1.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button type="button" onclick="clearForm()">Clear Form</button>
+            <button type="button" class="primary" onclick="saveData()">Save Progress</button>
+            <button type="button" onclick="downloadPDF()">Download PDF</button>
+            <button type="button" onclick="window.print()">Print</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <img src="form-footer-graphic.png" alt="" class="footer-graphic" onerror="this.style.display='none'">
+            </div>
+            <div class="footer-copyright">
+                © 2026 MUVIST Ltd. All rights reserved. MUVIST® is a registered trademark of MUVIST Ltd. Course materials are the intellectual property of Paula Lain and Marshall Gill and may be reproduced by enrolled organisations for internal use only.
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+                
+                // Update tab buttons
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(targetTab).classList.add('active');
+                
+                // Update dashboard when switching to it
+                if (targetTab === 'dashboard') {
+                    updateDashboard();
+                }
+            });
+        });
+
+        // Auto-save functionality
+        function saveToLocalStorage(key, value) {
+            localStorage.setItem('muvist-kpi-' + key, value);
+        }
+
+        function loadFromLocalStorage(key) {
+            return localStorage.getItem('muvist-kpi-' + key) || '';
+        }
+
+        // Save org info
+        document.getElementById('org-name').addEventListener('blur', function() {
+            saveToLocalStorage('org-name', this.value);
+            showToast('Organisation info saved');
+        });
+
+        document.getElementById('org-type').addEventListener('blur', function() {
+            saveToLocalStorage('org-type', this.value);
+        });
+
+        document.getElementById('date-started').addEventListener('blur', function() {
+            saveToLocalStorage('date-started', this.value);
+        });
+
+        // Save baseline metrics
+        document.querySelectorAll('#baseline input').forEach(input => {
+            input.addEventListener('blur', function() {
+                saveToLocalStorage(this.id, this.value);
+                showToast('Baseline saved');
+            });
+        });
+
+        // Save weekly tracker
+        document.querySelectorAll('.weekly-input').forEach(input => {
+            input.addEventListener('blur', function() {
+                const metric = this.dataset.metric;
+                const week = this.dataset.week;
+                saveToLocalStorage(`weekly-${metric}-${week}`, this.value);
+                showToast('Week ' + week + ' saved');
+            });
+        });
+
+        // Load all saved data
+        function loadAllData() {
+            // Load org info
+            document.getElementById('org-name').value = loadFromLocalStorage('org-name');
+            document.getElementById('org-type').value = loadFromLocalStorage('org-type');
+            document.getElementById('date-started').value = loadFromLocalStorage('date-started');
+
+            // Load baseline metrics
+            document.querySelectorAll('#baseline input').forEach(input => {
+                input.value = loadFromLocalStorage(input.id);
+            });
+
+            // Load weekly tracker
+            document.querySelectorAll('.weekly-input').forEach(input => {
+                const metric = input.dataset.metric;
+                const week = input.dataset.week;
+                input.value = loadFromLocalStorage(`weekly-${metric}-${week}`);
+            });
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            const dashboardContent = document.getElementById('dashboard-content');
+            const metrics = [
+                { id: 'email-subs', name: 'Email subscribers' },
+                { id: 'social-followers', name: 'Social followers (total)' },
+                { id: 'website-sessions', name: 'Monthly website sessions' },
+                { id: 'email-open-rate', name: 'Email open rate' },
+                { id: 'monthly-active', name: 'Monthly active supporters/customers' },
+                { id: 'new-weekly', name: 'New supporters/customers (last week)' },
+                { id: 'advocates', name: 'Active advocates/champions' }
+            ];
+
+            let html = `
+                <div class="dashboard-metric dashboard-header">
+                    <div class="metric-name">Metric</div>
+                    <div class="value">Week 1</div>
+                    <div class="value">Week 8</div>
+                    <div class="change">Change</div>
+                    <div class="trend">Trend</div>
+                </div>
+            `;
+            metrics.forEach(metric => {
+                const week1 = loadFromLocalStorage(`weekly-${metric.id}-1`);
+                const week8 = loadFromLocalStorage(`weekly-${metric.id}-8`);
+                
+                let change = '';
+                let changeClass = '';
+                let trend = '';
+                
+                if (week1 && week8) {
+                    const val1 = parseFloat(week1);
+                    const val8 = parseFloat(week8);
+                    
+                    if (!isNaN(val1) && !isNaN(val8)) {
+                        const diff = val8 - val1;
+                        const pct = val1 !== 0 ? ((diff / val1) * 100).toFixed(1) : 0;
+                        
+                        if (diff > 0) {
+                            change = `+${diff} (+${pct}%)`;
+                            changeClass = 'positive';
+                            trend = '↗';
+                        } else if (diff < 0) {
+                            change = `${diff} (${pct}%)`;
+                            changeClass = 'negative';
+                            trend = '↘';
+                        } else {
+                            change = 'No change';
+                            trend = '→';
+                        }
+                    }
+                }
+
+                html += `
+                    <div class="dashboard-metric">
+                        <div class="metric-name">${metric.name}</div>
+                        <div class="value">${week1 || '—'}</div>
+                        <div class="value">${week8 || '—'}</div>
+                        <div class="change ${changeClass}">${change || '—'}</div>
+                        <div class="trend">${trend}</div>
+                    </div>
+                `;
+            });
+
+            dashboardContent.innerHTML = html;
+        }
+
+        // Clear form
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // Save data (manual save with confirmation)
+        function saveData() {
+            showToast('All data saved successfully!', 2000);
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const element = document.querySelector('.page');
+            const opt = {
+                margin: 10,
+                filename: 'muvist-kpi-tracker.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+            showToast('Downloading PDF...');
+        }
+
+        // Toast notification
+        function showToast(message, duration = 1500) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAllData();
+            updateDashboard();
+        });
+    </script>
+</body>
+</html>
