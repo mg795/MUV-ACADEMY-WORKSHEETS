@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 Workbook - Muvist Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: #f0f0f0;
+        color: #1a1a1a;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- Header (matches Mod.1-1.5) ---------- */
+    .header { position: relative; padding: 30px; min-height: 140px; }
+
+    /* Module 2 colour: MUVIST blue, replaces the Module 1 red on badge and lesson tags */
+    .module-badge {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        background: #005a8d;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 15px 25px 15px 20px;
+        border-radius: 0 25px 25px 0;
+    }
+
+    .header-tagline {
+        position: absolute;
+        left: 0;
+        top: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1a1a1a;
+        white-space: nowrap;
+        line-height: 1;
+        padding-left: 20px;
+    }
+
+    .logo { position: absolute; right: 30px; top: 30px; }
+    .logo img { height: 40px; width: auto; }
+
+    .title-section { margin-top: 115px; text-align: left; }
+
+    .title-section h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #809364;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        line-height: 1.2;
+    }
+
+    .title-section h1 .title-module { color: #005a8d; }
+
+    .header-icon { height: 48px; width: auto; }
+
+    .subtitle { font-size: 16px; font-weight: 500; color: #4a4a4a; margin-top: 30px; }
+
+    /* Lesson strip under the title: four lesson tags, each links to its section */
+    .lesson-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .lesson-strip a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #1a1a1a;
+        border: 1px solid #d0d0d0;
+        border-left: 5px solid #005a8d;
+        border-radius: 4px;
+        padding: 10px 12px;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 1.3;
+        transition: border-color 0.2s;
+    }
+
+    .lesson-strip a:hover { border-color: #005a8d; }
+
+    .lesson-strip .strip-num {
+        background: #005a8d;
+        color: white;
+        font-weight: 700;
+        font-size: 12px;
+        border-radius: 12px;
+        padding: 3px 10px;
+        flex-shrink: 0;
+    }
+
+    /* ---------- Content ---------- */
+    .content { padding: 30px; }
+
+    .meta-table { width: 100%; border-collapse: collapse; margin: 0 0 10px 0; }
+    .meta-table td { padding: 10px 15px; border: 1px solid #d0d0d0; }
+    .meta-table td.meta-label { background: #f9f9f7; font-weight: 700; width: 15%; }
+    .meta-table input { width: 100%; border: none; font-family: 'Montserrat', sans-serif; font-size: 13px; padding: 4px 0; }
+    .meta-table input:focus { outline: none; }
+
+    .intro-text p { margin-bottom: 12px; }
+    .intro-text strong { font-weight: 700; }
+
+    .info-box {
+        background: #f9f9f7;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 5px 0 15px 0;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .info-box img { height: 26px; width: auto; flex-shrink: 0; }
+    .info-box p { margin: 0; }
+
+    /* ---------- Lesson heading ---------- */
+    .lesson { margin-top: 50px; }
+    .lesson:first-of-type { margin-top: 30px; }
+
+    .lesson-head {
+        padding-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .lesson-head-row { display: flex; align-items: center; gap: 12px; }
+
+    /* Page 2: extra 20px between the Lesson 2.2 heading and 'Why this matters' */
+    #lesson-2-2 .lesson-head { margin-bottom: 40px; }
+    /* Page 4: extra 15px between the Lesson 2.4 heading and 'Why this matters' */
+    #lesson-2-4 .lesson-head { margin-bottom: 35px; }
+    /* Page 3: extra 15px between the Lesson 2.3 heading and 'Why this matters' */
+    #lesson-2-3 .lesson-head { margin-bottom: 35px; }
+
+    /* Title and strapline share one baseline; the pair stays centred with the icon, tag and logo */
+    .lesson-titles { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 12px; }
+    .lesson-titles .lesson-title { flex-shrink: 0; }
+
+    .lesson-icon { height: 44px; width: auto; }
+
+    .lesson-tag {
+        background: #005a8d;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 7px 16px;
+        border-radius: 20px;
+        white-space: nowrap;
+    }
+
+    .lesson-title { font-size: 24px; font-weight: 700; color: #809364; line-height: 1.2; }
+
+    /* Heading with its instruction beside it (Rewrite blocks) */
+    .sub-inline { display: flex; align-items: center; gap: 20px; margin: 30px 0 15px 0; }
+    .sub-inline .sub-header { margin: 0; flex-shrink: 0; }
+    .sub-inline .sub-intro { margin: 0; }
+
+    /* MUVIST Academy logo top right of pages 2 to 4 in print; hidden on screen, where the page header logo already shows */
+    .lesson-logo { display: none; height: 40px; width: auto; margin-left: auto; flex-shrink: 0; }
+
+    .lesson-page {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 600;
+        color: #005a8d;
+        white-space: nowrap;
+    }
+
+    /* Strapline sits beside the lesson title, in bold, on every lesson */
+    .lesson-strap {
+        flex: 1;
+        min-width: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #4a4a4a;
+        line-height: 1.35;
+        margin: 0 0 0 8px;
+    }
+
+    /* ---------- Sub-sections inside a lesson ---------- */
+    .sub-header { display: flex; align-items: center; gap: 12px; margin: 30px 0 8px 0; }
+    .sub-icon { height: 36px; width: auto; }
+    .sub-header h3 { font-size: 18px; font-weight: 700; color: #809364; }
+    .sub-intro { color: #4a4a4a; margin-bottom: 15px; }
+
+    textarea, .line-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+        resize: vertical;
+        background: white;
+    }
+
+    textarea:focus, .line-input:focus { outline: none; border-color: #809364; }
+
+    /* Story arc: 2 x 2 */
+    .arc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .arc-card { border: 1px solid #d0d0d0; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+    .arc-card-header { background: #d9e4d0; padding: 12px 20px; border-bottom: 1px solid #d0d0d0; }
+    .arc-card-header .part { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #005a8d; text-transform: uppercase; }
+    .arc-card-header .name { font-size: 15px; font-weight: 700; color: #1a1a1a; display: block; }
+    .arc-card-body { padding: 15px 20px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+    .arc-card-body textarea { margin-top: auto; }
+    .arc-card-body p { color: #4a4a4a; margin-bottom: 12px; }
+
+    /* Tick cards (sibling: ethics-item) */
+    .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .check-card {
+        display: block;
+        background: white;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px;
+        padding: 15px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .check-card:hover { border-color: #809364; }
+    .check-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .check-head strong { color: #809364; font-size: 14px; font-weight: 700; }
+    .check-card input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; }
+    .check-desc { display: block; color: #4a4a4a; }
+    .check-card.plain .check-head { margin-bottom: 0; align-items: flex-start; }
+    .check-card.plain .check-head span { color: #1a1a1a; font-weight: 400; font-size: 13px; }
+
+    /* Two-column reference and principles cards (sibling: benefit-card) */
+    .ref-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .ref-card { border: 1px solid #d0d0d0; border-radius: 4px; overflow: hidden; }
+    .ref-card-header { background: #d9e4d0; padding: 12px 20px; border-bottom: 1px solid #d0d0d0; font-size: 14px; font-weight: 700; }
+    .ref-card-header .mark-no { color: #b6141c; margin-right: 6px; }
+    .ref-card-header .mark-yes { color: #809364; margin-right: 6px; }
+    .ref-card-body { padding: 15px 20px; }
+    .ref-card-body p { margin-bottom: 8px; }
+    .ref-card-body .example { font-style: italic; color: #4a4a4a; margin-bottom: 0; }
+    .ref-closing { margin-top: 15px; font-weight: 700; color: #809364; text-align: center; font-size: 14px; }
+    .ref-card.principle .ref-card-header { text-align: center; font-size: 15px; }
+    .ref-card.principle .ref-card-body { text-align: center; }
+
+    /* Working tables (sibling: claims-table) */
+    .table-wrap { overflow-x: auto; }
+    .work-table { width: 100%; border-collapse: collapse; }
+    .work-table th {
+        padding: 12px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 13px;
+        color: #809364;
+        background: #f9f9f7;
+        border: 1px solid #d0d0d0;
+        vertical-align: bottom;
+    }
+    .work-table td { padding: 10px; border: 1px solid #d0d0d0; vertical-align: top; }
+    .work-table tr { break-inside: avoid; }
+    /* No grey outline on any write-in box; a sage ring shows only while typing on screen */
+    textarea, .line-input { border: none; }
+    textarea:focus, .line-input:focus { box-shadow: inset 0 0 0 1px #809364; }
+    /* Table write-in boxes: no inner outline, the table cell is the box */
+    .work-table textarea { border: none; border-radius: 0; background: transparent; padding: 4px; resize: none; }
+    .work-table textarea:focus { background: #f9f9f7; }
+    .work-table td.fixed { background: #f9f9f7; min-width: 150px; }
+    .work-table td.fixed .row-num { display: inline-block; background: #005a8d; color: white; font-weight: 700; font-size: 12px; border-radius: 10px; padding: 0 8px; margin-bottom: 4px; }
+    .work-table td.fixed strong { display: block; font-size: 14px; }
+    .work-table td.fixed em { display: block; color: #4a4a4a; font-style: italic; font-size: 12px; line-height: 1.5; }
+    .work-table td.fixed .job { margin-top: 6px; font-style: normal; color: #1a1a1a; }
+    .work-table td.fixed .job b { color: #809364; }
+    .story-ticks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+    .story-ticks label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; }
+    .story-ticks input { width: 16px; height: 16px; }
+
+    /* Gaps audit 2 x 2 */
+    .audit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .audit-item { background: #f9f9f7; border: 1px solid #d0d0d0; border-radius: 4px; padding: 15px; }
+    .audit-item strong { display: block; margin-bottom: 8px; }
+
+    /* Rewrite blocks */
+    .rewrite { border: 1px solid #d0d0d0; border-radius: 4px; overflow: hidden; margin-bottom: 20px; break-inside: avoid; }
+    .rewrite-top { display: grid; grid-template-columns: 60px 1fr 1fr; background: #f9f9f7; border-bottom: 1px solid #d0d0d0; align-items: stretch; }
+    .rewrite-num { background: #005a8d; color: white; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .rewrite-field { padding: 12px 15px; display: flex; align-items: center; gap: 10px; }
+    .rewrite-field label { font-weight: 700; white-space: nowrap; }
+    .rewrite-body { display: grid; grid-template-columns: 1fr 1fr; }
+    /* Pale grey panel so the white write-in boxes stand out */
+    .rewrite-body { background: #f9f9f7; }
+    .rewrite-body textarea { background: white; }
+    .rewrite-col { padding: 15px; }
+    .rewrite-col + .rewrite-col { border-left: 1px solid #d0d0d0; }
+    .rewrite-col .col-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .rewrite-col .col-title .before { color: #b6141c; }
+    .rewrite-col .col-title .after { color: #809364; }
+    .rewrite-col .col-hint { color: #4a4a4a; font-size: 12px; margin-bottom: 8px; }
+    .rewrite-col .field-label { font-weight: 600; margin: 12px 0 6px 0; }
+    .radio-row { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 8px; }
+    .radio-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .radio-row input { width: 16px; height: 16px; }
+    .talk-test { background: #d9e4d0; border-radius: 4px; padding: 10px 12px; margin-top: 12px; }
+    .talk-test strong { color: #1a1a1a; }
+
+    /* Pass or fail tests, 3 across */
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .test-card { border: 1px solid #d0d0d0; border-radius: 4px; padding: 15px; }
+    .test-card strong { display: block; color: #809364; font-size: 14px; margin-bottom: 6px; }
+    .test-card p { color: #4a4a4a; }
+
+    /* Transition box (sibling: final-note) */
+    .final-note {
+        background: #f9f9f7;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px;
+        padding: 20px;
+        margin-top: 25px;
+        text-align: center;
+    }
+    .final-note strong { display: block; margin-bottom: 8px; color: #809364; font-size: 14px; }
+    .final-note p { color: #4a4a4a; }
+    .final-note + .final-note { margin-top: 15px; }
+
+    /* ---------- Actions and footer ---------- */
+    .actions {
+        padding: 20px 30px;
+        background: #f9f9f7;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+    .actions button {
+        padding: 12px 24px;
+        border: 1px solid #b3bf8f;
+        background: white;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: #1a1a1a;
+    }
+    .actions button:hover { background: #f5f5f5; }
+    .actions button.primary { background: #b3bf8f; color: white; }
+    .actions button.primary:hover { background: #9faa7a; border-color: #9faa7a; }
+
+    .footer { padding: 20px; background: white; text-align: center; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+    .footer-graphic { height: 52.5px; width: auto; }
+    .footer-copyright { font-size: 10px; color: #666; line-height: 1.5; max-width: 800px; }
+
+    .toast {
+        position: fixed; bottom: 30px; right: 30px; background: #1a1a1a; color: white;
+        padding: 15px 20px; border-radius: 4px; font-size: 14px; opacity: 0;
+        transform: translateY(20px); transition: all 0.3s; pointer-events: none; z-index: 1000;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+        .lesson-strip { grid-template-columns: repeat(2, 1fr); }
+        .test-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+        .header-tagline { font-size: 11px; }
+        .logo { top: 90px; left: 20px; right: auto; }
+        .logo img { height: 30px; }
+        .title-section { margin-top: 135px; }
+        .meta-table td { display: block; width: 100% !important; }
+        .module-badge { font-size: 14px; padding: 12px 20px 12px 15px; }
+        .title-section h1 { font-size: 24px; }
+        .subtitle { font-size: 14px; }
+        .sub-inline { display: block; }
+        .sub-inline .sub-header { margin-bottom: 8px; }
+        .lesson-strip, .arc-grid, .check-grid, .ref-grid, .audit-grid, .rewrite-body { grid-template-columns: 1fr; }
+        .rewrite-col + .rewrite-col { border-left: none; border-top: 1px solid #d0d0d0; }
+        .rewrite-top { grid-template-columns: 50px 1fr; }
+        .rewrite-top .rewrite-field:last-child { grid-column: 2; }
+        .lesson-head-row { flex-wrap: wrap; }
+        .lesson-title { font-size: 20px; }
+        .lesson-page { display: none; }
+        .lesson-titles { flex-wrap: wrap; flex-basis: 100%; }
+        .lesson-strap { flex-basis: 100%; margin: 4px 0 0 0; }
+        .work-table { min-width: 820px; }
+        .actions { flex-direction: column; }
+        .actions button { width: 100%; }
+    }
+
+    @media print {
+        body { background: white; }
+        .page { box-shadow: none; max-width: none; }
+        .actions, .toast { display: none !important; }
+        .lesson-head { break-after: avoid; }
+        .lesson-logo { display: block; }
+        .footer { break-inside: avoid; }
+        /* Compact fields in print so the workbook fits on four A4 pages */
+        textarea, .line-input { font-size: 12px; line-height: 1.45; padding: 5px 8px; }
+        textarea[rows="2"] { height: 46px; }
+        textarea[rows="3"] { height: 60px; }
+        textarea[rows="4"] { height: 78px; }
+        .meta-table td { padding: 6px 12px; }
+        .work-table td { padding: 7px; }
+        .work-table th { padding: 8px 10px; }
+        .audit-item { padding: 10px 12px; }
+        .audit-item strong { margin-bottom: 5px; }
+        #lesson-2-4 .ref-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        #lesson-2-4 .ref-card-header { padding: 8px 12px; }
+        #lesson-2-4 .ref-card-body { padding: 8px 12px; }
+        .rewrite { margin-bottom: 12px; }
+        .rewrite-top { grid-template-columns: 50px 1fr 1fr; }
+        .rewrite-num { font-size: 18px; }
+        .rewrite-field { padding: 6px 12px; }
+        .rewrite-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.3fr;
+            grid-template-areas: "tb lw ta" "b w a" "tt tt a";
+            gap: 5px 14px;
+            padding: 10px 12px;
+            align-items: end;
+        }
+        .rewrite-col { display: contents; }
+        .rewrite-col:first-child .col-title { grid-area: tb; }
+        .rewrite-col:first-child .field-label { grid-area: lw; margin: 0; font-size: 12px; line-height: 1.4; }
+        .rewrite-col:first-child textarea:nth-of-type(1) { grid-area: b; }
+        .rewrite-col:first-child textarea:nth-of-type(2) { grid-area: w; }
+        .rewrite-col:last-child .col-title { grid-area: ta; }
+        .rewrite-col:last-child textarea { grid-area: a; height: 100%; align-self: stretch; }
+        .rewrite-col .col-title { margin: 0; }
+        .talk-test { grid-area: tt; margin-top: 3px; padding: 6px 10px; display: flex; align-items: center; gap: 8px; }
+        .talk-test .radio-row { margin-top: 0; }
+        .test-card { padding: 10px 12px; }
+        .final-note { padding: 10px 20px; }
+        .final-note strong { margin-bottom: 4px; }
+        .intro-text p { margin-bottom: 6px; }
+        .footer { padding: 10px; gap: 8px; }
+        .footer-graphic { height: 40px; }
+        /* Taller boxes fill pages 1 to 3, leaving about 35px clear at the foot */
+        #lesson-2-1 .arc-card-body textarea { height: 190px; }
+        #lesson-2-2 .work-table textarea { height: 77px; }
+        #lesson-2-2 .lesson-head { margin-bottom: 32px; }
+        /* More space between the Lesson 2.2 heading and its strapline */
+        .sub-inline { margin: 18px 0 10px 0; }
+        /* Freed space goes to the rewrite boxes; page 4 also ends about 35px from the foot */
+        #lesson-2-4 .rewrite textarea { height: 76px; }
+        #lesson-2-4 .lesson-head { margin-bottom: 27px; }
+        #lesson-2-4 .rewrite-col:last-child textarea { height: 100%; }
+        /* Rewrite blocks: all three column titles match the Role and Journey stage labels (13px bold);
+           the middle column widens so 'What is wrong with it?' sits on one line */
+        .rewrite-body { grid-template-columns: minmax(0, 1fr) max-content max-content; }
+        .rewrite-col .col-title,
+        .rewrite-col:first-child .field-label { font-size: 13px; font-weight: 700; line-height: 1.4; white-space: nowrap; color: #1a1a1a; }
+        #lesson-2-3 .work-table textarea { height: 160px; }
+        #lesson-2-3 .lesson-head { margin-bottom: 27px; }
+        #lesson-2-3 .audit-item textarea { height: 86px; }
+        /* One lesson per A4 page: 2.1 on page 1 through 2.4 on page 4 */
+        #lesson-2-2, #lesson-2-3, #lesson-2-4 { break-before: page; }
+        .content { padding-bottom: 10px; }
+        .lesson, .lesson:first-of-type { margin-top: 0; }
+        /* Keep each lesson heading with its opening text, never stranded at a page foot */
+        .lesson-head, .lesson .intro-text { break-after: avoid; break-inside: avoid; }
+        /* Tighter print spacing so all of Lesson 2.1 sits on page 1 */
+        .title-section { margin-top: 80px; }
+        .lesson-strip { margin-top: 12px; }
+        .content { padding-top: 20px; }
+        .lesson { margin-top: 30px; }
+        .lesson:first-of-type { margin-top: 18px; }
+        .lesson-head { padding-top: 0; margin-bottom: 12px; }
+        .intro-text p { margin-bottom: 8px; }
+        .info-box { margin: 4px 0 10px 0; padding: 12px 15px; }
+        .sub-header { margin: 18px 0 6px 0; }
+        .sub-intro { margin-bottom: 10px; }
+        .arc-card-body { padding: 12px 18px 15px 18px; }
+        .arc-card-body p { margin-bottom: 8px; }
+        #lesson-2-1 .check-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .final-note { margin-top: 15px; padding: 14px 20px; }
+        .arc-card, .check-card, .ref-card, .audit-item, .rewrite, .test-card, .final-note, .info-box, .lesson-head, .sub-header { break-inside: avoid; }
+        .sub-header { break-after: avoid; }
+        textarea { resize: none; }
+    }
+</style>
+</head>
+<body>
+<div class="page">
+
+    <!-- ============ HEADER ============ -->
+    <div class="header">
+        <div class="module-badge">Mod.2-Workbook</div>
+        <div class="logo"><img src="form-top-logo.png" alt="Muvist Academy"></div>
+        <div class="title-section">
+            <h1><img src="form-arrow-icon.png" alt="" class="header-icon"><span><span class="title-module">Module 2</span> Workbook</span></h1>
+            <p class="subtitle">Build your Movement Story, map your supporters and rewrite your invitations. Lessons 2.1 to 2.4.</p>
+            <nav class="lesson-strip">
+                <a href="#lesson-2-1"><span class="strip-num">2.1</span>Movement Story</a>
+                <a href="#lesson-2-2"><span class="strip-num">2.2</span>Supporter Roles Mapping</a>
+                <a href="#lesson-2-3"><span class="strip-num">2.3</span>Supporter Journey Map</a>
+                <a href="#lesson-2-4"><span class="strip-num">2.4</span>Invitation Rewrite</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- WB2-G2 / WB2-G3 -->
+        <table class="meta-table">
+            <tr>
+                <td class="meta-label">Organisation</td>
+                <td><input type="text" id="org" aria-label="Organisation"></td>
+                <td class="meta-label">Date</td>
+                <td><input type="text" id="date" aria-label="Date"></td>
+            </tr>
+        </table>
+
+        <section class="lesson" id="lesson-2-1">
+            <div class="lesson-head">
+                <div class="lesson-head-row">
+                    <img src="form-arrow-icon.png" alt="" class="lesson-icon">
+                    <span class="lesson-tag">Lesson 2.1</span>
+                    <div class="lesson-titles"><h2 class="lesson-title">Movement Story</h2><p class="lesson-strap">Draft your four-part story arc, the foundation everything in this module is built on.</p></div>
+                </div>
+            </div>
+            <div class="intro-text">
+                <p><strong>Why this matters:</strong> Without a clear story your organisation is just a service. A movement needs a narrative: a problem worth solving, a belief worth holding, a future worth building towards and a specific invitation to join in.</p>
+                <p><strong>How to use this page:</strong> Complete all four boxes in order. Each part builds on the last. Write in plain language, not how it reads in a brochure, but how it sounds when you say it out loud to someone who has never heard of your organisation. Do this with one other person who knows your organisation well enough to push back on vague language. Takes 30 to 40 minutes. Bring your Fit Check from Lesson 1.5: your Belief Statement goes in Part 2.</p>
+            </div>
+            <div class="info-box note-block">
+                <img src="form-arrow-icon.png" alt="">
+                <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer or member.</p>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Your four-part story arc</h3>
+            </div>
+            <p class="sub-intro">Write your first honest draft. Good enough to say out loud is good enough to start.</p>
+            <div class="arc-grid">
+                <div class="arc-card">
+                    <div class="arc-card-header"><span class="part">Part 1</span><span class="name">The Problem</span></div>
+                    <div class="arc-card-body">
+                        <p>What is wrong with the world as it is? Write the injustice, gap or failure your organisation exists to address. Be specific. Avoid starting with "we".</p>
+                        <textarea id="arc1" rows="4" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="arc-card">
+                    <div class="arc-card-header"><span class="part">Part 2</span><span class="name">The Belief</span></div>
+                    <div class="arc-card-body">
+                        <p>What do you believe to be true that others may not yet see? This is the conviction that drives your work. Use your Belief Statement from Lesson 1.5 as a starting point.</p>
+                        <textarea id="arc2" rows="4" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="arc-card">
+                    <div class="arc-card-header"><span class="part">Part 3</span><span class="name">The Vision</span></div>
+                    <div class="arc-card-body">
+                        <p>What does the world look like when your belief becomes reality? Not a mission statement. A picture of change that people can imagine themselves inside.</p>
+                        <textarea id="arc3" rows="4" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="arc-card">
+                    <div class="arc-card-header"><span class="part">Part 4</span><span class="name">The Invitation</span></div>
+                    <div class="arc-card-body">
+                        <p>What is the one specific thing you are asking someone to do right now? Not everything you offer, the single most important first step. Make it easy to say yes to.</p>
+                        <textarea id="arc4" rows="4" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Four quick tests</h3>
+            </div>
+            <p class="sub-intro">Tick each one before you move to Lesson 2.2.</p>
+            <div class="check-grid">
+                <label class="check-card" for="t21-outside">
+                    <span class="check-head"><input type="checkbox" id="t21-outside"><strong>Outside Test</strong></span>
+                    <span class="check-desc">Would someone with no knowledge of your organisation understand the Problem and Vision in under 30 seconds?</span>
+                </label>
+                <label class="check-card" for="t21-repeat">
+                    <span class="check-head"><input type="checkbox" id="t21-repeat"><strong>Repetition Test</strong></span>
+                    <span class="check-desc">Could a supporter recall the Invitation to a friend tonight without looking anything up?</span>
+                </label>
+                <label class="check-card" for="t21-honesty">
+                    <span class="check-head"><input type="checkbox" id="t21-honesty"><strong>Honesty Test</strong></span>
+                    <span class="check-desc">Does every part of this story pass your Fit Check from Lesson 1.5? No claim here you cannot back up.</span>
+                </label>
+                <label class="check-card" for="t21-action">
+                    <span class="check-head"><input type="checkbox" id="t21-action"><strong>Action Test</strong></span>
+                    <span class="check-desc">Does the Invitation ask for exactly one thing? If you can spot "and" in it, cut one of the asks.</span>
+                </label>
+            </div>
+            <div class="final-note">
+                <strong>Before you move to Lesson 2.2</strong>
+                <p>You now have a four-part Movement Story. In Lesson 2.2 you will map the different roles your supporters and prospects play. Each role needs a version of your story pitched at them specifically. The clearer your story is now, the easier the mapping becomes.</p>
+            </div>
+        </section>
+        <section class="lesson" id="lesson-2-2">
+            <div class="lesson-head">
+                <div class="lesson-head-row">
+                    <img src="form-arrow-icon.png" alt="" class="lesson-icon">
+                    <span class="lesson-tag">Lesson 2.2</span>
+                    <div class="lesson-titles"><h2 class="lesson-title">Supporter Roles Mapping</h2><p class="lesson-strap">Name the roles in your movement, not just the demographics.</p></div>
+                    <img src="form-top-logo.png" alt="Muvist Academy" class="lesson-logo">
+                </div>
+            </div>
+            <div class="intro-text">
+                <p><strong>Why this matters:</strong> If you only think in demographics (age, income, job title) you miss the jobs people are actually trying to do in your movement. You either talk over them or under-ask them and they drift away. Role-based thinking tells you what someone needs at this moment in their journey, which is far more useful than knowing their postcode.</p>
+                <p><strong>How to use this page:</strong> Complete this during or after Lesson 2.2. Have your Movement Story (Lesson 2.1) to hand. Aim for 3 roles minimum and 6 maximum. Use the universal role names below as a starting point, then give each role your own name, the word or phrase your people would actually recognise themselves in.</p>
+            </div>
+            <div class="info-box note-block">
+                <img src="form-arrow-icon.png" alt="">
+                <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer or member.</p>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>The shift</h3>
+            </div>
+            <p class="sub-intro">Quick reference as you complete the table below.</p>
+            <div class="ref-grid">
+                <div class="ref-card">
+                    <div class="ref-card-header"><span class="mark-no">&#10007;</span>Demographic thinking</div>
+                    <div class="ref-card-body">
+                        <p>Tells you who someone is: age, income, job title, location. Useful context, but it does not tell you what they need right now.</p>
+                        <p class="example">e.g. &lsquo;Female, 35 to 55, urban professional&rsquo;</p>
+                    </div>
+                </div>
+                <div class="ref-card">
+                    <div class="ref-card-header"><span class="mark-yes">&#10003;</span>Role-based thinking</div>
+                    <div class="ref-card-body">
+                        <p>Tells you where someone is in your movement right now. Tells you what they need to move forward. This is what changes what you say to them.</p>
+                        <p class="example">e.g. &lsquo;First-Timer, needs a clear next step and welcome&rsquo;</p>
+                    </div>
+                </div>
+            </div>
+            <p class="ref-closing">The roles are the same. The language of the invitation differs.</p>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Your roles</h3>
+            </div>
+            <p class="sub-intro">Name 3 to 6. Use your own language throughout.</p>
+            <div class="table-wrap">
+            <table class="work-table">
+                <thead><tr>
+                    <th style="width:14%">Universal role</th>
+                    <th style="width:16%">Your name for this role</th>
+                    <th style="width:18%">What they think and feel right now</th>
+                    <th style="width:18%">What they need to move forward</th>
+                    <th style="width:20%">Your specific invitation for this role</th>
+                    <th style="width:14%">Movement Story tick</th>
+                </tr></thead>
+                <tbody>
+                <tr>
+                    <td class="fixed"><span class="row-num">1</span><strong>Observer</strong><em>Aware, not yet acted.</em></td>
+                    <td><textarea id="r1-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r1-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r1-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r1-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r1-problem"> Problem</label><label><input type="checkbox" id="r1-belief"> Belief</label><label><input type="checkbox" id="r1-vision"> Vision</label><label><input type="checkbox" id="r1-invitation"> Invitation</label></div></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">2</span><strong>First-Timer</strong><em>Just taken first action.</em></td>
+                    <td><textarea id="r2-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r2-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r2-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r2-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r2-problem"> Problem</label><label><input type="checkbox" id="r2-belief"> Belief</label><label><input type="checkbox" id="r2-vision"> Vision</label><label><input type="checkbox" id="r2-invitation"> Invitation</label></div></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">3</span><strong>Regular</strong><em>Comes back reliably.</em></td>
+                    <td><textarea id="r3-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r3-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r3-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r3-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r3-problem"> Problem</label><label><input type="checkbox" id="r3-belief"> Belief</label><label><input type="checkbox" id="r3-vision"> Vision</label><label><input type="checkbox" id="r3-invitation"> Invitation</label></div></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">4</span><strong>Champion</strong><em>Advocates without prompting.</em></td>
+                    <td><textarea id="r4-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r4-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r4-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r4-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r4-problem"> Problem</label><label><input type="checkbox" id="r4-belief"> Belief</label><label><input type="checkbox" id="r4-vision"> Vision</label><label><input type="checkbox" id="r4-invitation"> Invitation</label></div></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">5</span><strong>Organiser</strong><em>Already doing some of the work informally.</em></td>
+                    <td><textarea id="r5-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r5-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r5-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r5-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r5-problem"> Problem</label><label><input type="checkbox" id="r5-belief"> Belief</label><label><input type="checkbox" id="r5-vision"> Vision</label><label><input type="checkbox" id="r5-invitation"> Invitation</label></div></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">6</span><strong>Returner</strong><em>Was involved, went quiet.</em></td>
+                    <td><textarea id="r6-name" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r6-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r6-need" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="r6-invite" rows="2" placeholder=""></textarea></td>
+                    <td><div class="story-ticks"><label><input type="checkbox" id="r6-problem"> Problem</label><label><input type="checkbox" id="r6-belief"> Belief</label><label><input type="checkbox" id="r6-vision"> Vision</label><label><input type="checkbox" id="r6-invitation"> Invitation</label></div></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Sense check</h3>
+            </div>
+            <p class="sub-intro">Tick before you move to Lesson 2.3.</p>
+            <div class="check-grid">
+                <label class="check-card plain" for="s22-1">
+                    <span class="check-head"><input type="checkbox" id="s22-1"><span>Every role has a name a real person would recognise themselves in.</span></span>
+                </label>
+                <label class="check-card plain" for="s22-2">
+                    <span class="check-head"><input type="checkbox" id="s22-2"><span>No two roles have an identical invitation.</span></span>
+                </label>
+                <label class="check-card plain" for="s22-3">
+                    <span class="check-head"><input type="checkbox" id="s22-3"><span>At least one role represents someone who has never interacted with you before.</span></span>
+                </label>
+                <label class="check-card plain" for="s22-4">
+                    <span class="check-head"><input type="checkbox" id="s22-4"><span>At least one role is capable of bringing others in.</span></span>
+                </label>
+                <label class="check-card plain" for="s22-5">
+                    <span class="check-head"><input type="checkbox" id="s22-5"><span>Each role maps to at least one part of your Movement Story.</span></span>
+                </label>
+                <label class="check-card plain" for="s22-6">
+                    <span class="check-head"><input type="checkbox" id="s22-6"><span>You could write a different subject line for each role without it feeling identical.</span></span>
+                </label>
+            </div>
+            <div class="final-note">
+                <strong>Before you move to Lesson 2.3</strong>
+                <p>In Lesson 2.3 you will place each role along a five-stage journey and define the next obvious step at every stage. The clearer your roles are now, the easier that map becomes.</p>
+            </div>
+            <div class="final-note">
+                <strong>Connecting back to your Movement Story</strong>
+                <p>The Invitation in Part 4 of your story only works if you know who you are inviting. The story stays the same. The door it opens is different for each role.</p>
+            </div>
+        </section>
+        <section class="lesson" id="lesson-2-3">
+            <div class="lesson-head">
+                <div class="lesson-head-row">
+                    <img src="form-arrow-icon.png" alt="" class="lesson-icon">
+                    <span class="lesson-tag">Lesson 2.3</span>
+                    <div class="lesson-titles"><h2 class="lesson-title">Supporter Journey Map</h2><p class="lesson-strap">Map the first contact to Advocate path and the next obvious step at every stage.</p></div>
+                    <img src="form-top-logo.png" alt="Muvist Academy" class="lesson-logo">
+                </div>
+            </div>
+            <div class="intro-text">
+                <p><strong>Why this matters:</strong> If people do not know what to do next, they will not stick or share. Without a journey map, your experiences are random and momentum leaks. You keep doing cold starts instead of building layers.</p>
+                <p><strong>How to use this page:</strong> Bring your Movement Story (Lesson 2.1) and Supporter Roles (Lesson 2.2) before you start. Fill in all four columns for each stage. The &lsquo;Next Obvious Step&rsquo; column is the most important: be specific. One action, not a list. Review this map monthly, not just once.</p>
+            </div>
+            <div class="info-box note-block">
+                <img src="form-arrow-icon.png" alt="">
+                <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer or member.</p>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>The journey map</h3>
+            </div>
+            <p class="sub-intro">Five stages from stranger to advocate.</p>
+            <div class="table-wrap">
+            <table class="work-table">
+                <thead><tr>
+                    <th style="width:20%">Stage</th>
+                    <th style="width:20%">What they&rsquo;re thinking and feeling</th>
+                    <th style="width:20%">Proof or experience they need</th>
+                    <th style="width:18%">Roles present<br><span style="font-weight:500">(from Lesson 2.2)</span></th>
+                    <th style="width:22%">Next obvious step<br><span style="font-weight:500">(one action, be specific)</span></th>
+                </tr></thead>
+                <tbody>
+                <tr>
+                    <td class="fixed"><span class="row-num">Stage 1</span><strong>Unaware</strong><em>They do not know you exist.</em><em class="job"><b>Your job:</b> reach them.</em></td>
+                    <td><textarea id="j1-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j1-proof" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j1-roles" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j1-step" rows="2" placeholder=""></textarea></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">Stage 2</span><strong>Aware</strong><em>They have seen or heard of you.</em><em class="job"><b>Your job:</b> make the story clear and the first step easy.</em></td>
+                    <td><textarea id="j2-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j2-proof" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j2-roles" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j2-step" rows="2" placeholder=""></textarea></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">Stage 3</span><strong>First Action</strong><em>They have done something.</em><em class="job"><b>Your job:</b> give them an immediate next step. Do not leave a gap.</em></td>
+                    <td><textarea id="j3-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j3-proof" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j3-roles" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j3-step" rows="2" placeholder=""></textarea></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">Stage 4</span><strong>Repeat Action</strong><em>A habit is forming.</em><em class="job"><b>Your job:</b> deeper invitations, recognition, belonging.</em></td>
+                    <td><textarea id="j4-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j4-proof" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j4-roles" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j4-step" rows="2" placeholder=""></textarea></td>
+                </tr>
+                <tr>
+                    <td class="fixed"><span class="row-num">Stage 5</span><strong>Advocate</strong><em>They are bringing others.</em><em class="job"><b>Your job:</b> arm them with language and a shareable invitation.</em></td>
+                    <td><textarea id="j5-feel" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j5-proof" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j5-roles" rows="2" placeholder=""></textarea></td>
+                    <td><textarea id="j5-step" rows="2" placeholder=""></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Gaps and friction audit</h3>
+            </div>
+            <p class="sub-intro">Where is momentum leaking right now?</p>
+            <div class="audit-grid">
+                <div class="audit-item"><strong>Which stage transition has the highest drop-off?</strong><textarea id="gap1" rows="2" placeholder=""></textarea></div>
+                <div class="audit-item"><strong>What is the likely reason people stall there?</strong><textarea id="gap2" rows="2" placeholder=""></textarea></div>
+                <div class="audit-item"><strong>What one next obvious step are you currently missing?</strong><textarea id="gap3" rows="2" placeholder=""></textarea></div>
+                <div class="audit-item"><strong>What would you add, remove or change to fix it?</strong><textarea id="gap4" rows="2" placeholder=""></textarea></div>
+            </div>
+            <div class="final-note">
+                <strong>Before you move to Lesson 2.4</strong>
+                <p>You now have five stages, named roles at each stage and a next obvious step for each one. In Lesson 2.4 you will write the actual invitations for each stage in language real people will repeat and act on. Review the &lsquo;Next Obvious Step&rsquo; column: those are the invitations you are rewriting.</p>
+            </div>
+        </section>
+        <section class="lesson" id="lesson-2-4">
+            <div class="lesson-head">
+                <div class="lesson-head-row">
+                    <img src="form-arrow-icon.png" alt="" class="lesson-icon">
+                    <span class="lesson-tag">Lesson 2.4</span>
+                    <div class="lesson-titles"><h2 class="lesson-title">Invitation Rewrite</h2><p class="lesson-strap">Turn your invitations into language real people will say, share and act on.</p></div>
+                    <img src="form-top-logo.png" alt="Muvist Academy" class="lesson-logo">
+                </div>
+            </div>
+            <div class="intro-text">
+                <p><strong>Why this matters:</strong> Even with a good story and a clear journey, if the language is full of organisational jargon or asks for too many things at once, supporters and prospects will not repeat it. The movement stalls at the organisation&rsquo;s mouth.</p>
+                <p><strong>How to use this page:</strong> Complete this during or after Lesson 2.4. Bring your Journey Map (Lesson 2.3) and look at the &lsquo;Next Obvious Step&rsquo; column: those are the invitations you are rewriting here. Complete one block per role or journey stage. Aim for four rewrites minimum.</p>
+            </div>
+            <div class="info-box note-block">
+                <img src="form-arrow-icon.png" alt="">
+                <p>The mechanics work identically whether you are a charity or a business. Wherever you see supporter/prospect, use whichever term fits your organisation: donor, customer, client, volunteer or member.</p>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Four principles</h3>
+            </div>
+            <p class="sub-intro">Hold every invitation against all four before it goes anywhere.</p>
+            <div class="ref-grid">
+                <div class="ref-card principle">
+                    <div class="ref-card-header">Short</div>
+                    <div class="ref-card-body"><p style="margin:0">One sentence, not a paragraph.</p></div>
+                </div>
+                <div class="ref-card principle">
+                    <div class="ref-card-header">Concrete</div>
+                    <div class="ref-card-body"><p style="margin:0">Names a specific action or moment.</p></div>
+                </div>
+                <div class="ref-card principle">
+                    <div class="ref-card-header">True</div>
+                    <div class="ref-card-body"><p style="margin:0">Plain human language, not mission-speak.</p></div>
+                </div>
+                <div class="ref-card principle">
+                    <div class="ref-card-header">Theirs</div>
+                    <div class="ref-card-body"><p style="margin:0">Sounds like something they would say.</p></div>
+                </div>
+            </div>
+            <div class="sub-inline">
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Rewrite blocks</h3>
+            </div>
+            <p class="sub-intro">One block per role or journey stage. In the Before column write the invitation you currently use or would normally write. In the After column rewrite it so it passes all three pass or fail tests at the foot of this page. Name the role and stage for each block.</p>
+            </div>
+            <div class="rewrite">
+                <div class="rewrite-top">
+                    <div class="rewrite-num">1</div>
+                    <div class="rewrite-field"><label for="rw1-role">Role:</label><input class="line-input" type="text" id="rw1-role"></div>
+                    <div class="rewrite-field"><label for="rw1-stage">Journey stage:</label><input class="line-input" type="text" id="rw1-stage"></div>
+                </div>
+                <div class="rewrite-body">
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="before">BEFORE</span> Current language</div>
+                        <textarea id="rw1-before" rows="2" placeholder=""></textarea>
+                        <div class="field-label">What is wrong with it? Choose from jargon, vague, too long, all-about-us.</div>
+                        <textarea id="rw1-wrong" rows="2" placeholder=""></textarea>
+                    </div>
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="after">AFTER</span> Rewritten against Short, Concrete, True, Theirs</div>
+                        <textarea id="rw1-after" rows="3" placeholder=""></textarea>
+                        <div class="talk-test"><strong>Talk test:</strong> could they say this to a friend over coffee?
+                            <div class="radio-row"><label><input type="radio" name="rw1-talk" value="0"> Yes</label><label><input type="radio" name="rw1-talk" value="1"> Not yet, revise again</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rewrite">
+                <div class="rewrite-top">
+                    <div class="rewrite-num">2</div>
+                    <div class="rewrite-field"><label for="rw2-role">Role:</label><input class="line-input" type="text" id="rw2-role"></div>
+                    <div class="rewrite-field"><label for="rw2-stage">Journey stage:</label><input class="line-input" type="text" id="rw2-stage"></div>
+                </div>
+                <div class="rewrite-body">
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="before">BEFORE</span> Current language</div>
+                        <textarea id="rw2-before" rows="2" placeholder=""></textarea>
+                        <div class="field-label">What is wrong with it? Choose from jargon, vague, too long, all-about-us.</div>
+                        <textarea id="rw2-wrong" rows="2" placeholder=""></textarea>
+                    </div>
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="after">AFTER</span> Rewritten against Short, Concrete, True, Theirs</div>
+                        <textarea id="rw2-after" rows="3" placeholder=""></textarea>
+                        <div class="talk-test"><strong>Talk test:</strong> could they say this to a friend over coffee?
+                            <div class="radio-row"><label><input type="radio" name="rw2-talk" value="0"> Yes</label><label><input type="radio" name="rw2-talk" value="1"> Not yet, revise again</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rewrite">
+                <div class="rewrite-top">
+                    <div class="rewrite-num">3</div>
+                    <div class="rewrite-field"><label for="rw3-role">Role:</label><input class="line-input" type="text" id="rw3-role"></div>
+                    <div class="rewrite-field"><label for="rw3-stage">Journey stage:</label><input class="line-input" type="text" id="rw3-stage"></div>
+                </div>
+                <div class="rewrite-body">
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="before">BEFORE</span> Current language</div>
+                        <textarea id="rw3-before" rows="2" placeholder=""></textarea>
+                        <div class="field-label">What is wrong with it? Choose from jargon, vague, too long, all-about-us.</div>
+                        <textarea id="rw3-wrong" rows="2" placeholder=""></textarea>
+                    </div>
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="after">AFTER</span> Rewritten against Short, Concrete, True, Theirs</div>
+                        <textarea id="rw3-after" rows="3" placeholder=""></textarea>
+                        <div class="talk-test"><strong>Talk test:</strong> could they say this to a friend over coffee?
+                            <div class="radio-row"><label><input type="radio" name="rw3-talk" value="0"> Yes</label><label><input type="radio" name="rw3-talk" value="1"> Not yet, revise again</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rewrite">
+                <div class="rewrite-top">
+                    <div class="rewrite-num">4</div>
+                    <div class="rewrite-field"><label for="rw4-role">Role:</label><input class="line-input" type="text" id="rw4-role"></div>
+                    <div class="rewrite-field"><label for="rw4-stage">Journey stage:</label><input class="line-input" type="text" id="rw4-stage"></div>
+                </div>
+                <div class="rewrite-body">
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="before">BEFORE</span> Current language</div>
+                        <textarea id="rw4-before" rows="2" placeholder=""></textarea>
+                        <div class="field-label">What is wrong with it? Choose from jargon, vague, too long, all-about-us.</div>
+                        <textarea id="rw4-wrong" rows="2" placeholder=""></textarea>
+                    </div>
+                    <div class="rewrite-col">
+                        <div class="col-title"><span class="after">AFTER</span> Rewritten against Short, Concrete, True, Theirs</div>
+                        <textarea id="rw4-after" rows="3" placeholder=""></textarea>
+                        <div class="talk-test"><strong>Talk test:</strong> could they say this to a friend over coffee?
+                            <div class="radio-row"><label><input type="radio" name="rw4-talk" value="0"> Yes</label><label><input type="radio" name="rw4-talk" value="1"> Not yet, revise again</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-header">
+                <img src="form-arrow-icon.png" alt="" class="sub-icon">
+                <h3>Three pass or fail tests</h3>
+            </div>
+            <p class="sub-intro">Apply to all four rewrite blocks before each one leaves this page.</p>
+            <div class="test-grid">
+                <div class="test-card"><strong>Talk Test</strong><p>Would a real supporter say this out loud to a friend, in a pub, on a school run, at a neighbour&rsquo;s doorstep? Any hesitation at all? Simplify it.</p><div class="radio-row"><label><input type="radio" name="pf1" value="0"> Pass</label><label><input type="radio" name="pf1" value="1"> Fail, revisit</label></div></div>
+                <div class="test-card"><strong>One-Thing Test</strong><p>Is there exactly one action being asked for? Not a menu. If you can spot &lsquo;and&rsquo; in the invitation, cut one of the asks.</p><div class="radio-row"><label><input type="radio" name="pf2" value="0"> Pass</label><label><input type="radio" name="pf2" value="1"> Fail, revisit</label></div></div>
+                <div class="test-card"><strong>One-Role Test</strong><p>Is the invitation written for this specific role at this specific stage, or could it belong to any role in Lesson 2.2? If generic, make it specific.</p><div class="radio-row"><label><input type="radio" name="pf3" value="0"> Pass</label><label><input type="radio" name="pf3" value="1"> Fail, revisit</label></div></div>
+            </div>
+            <div class="final-note">
+                <strong>Before you move to Lesson 2.5</strong>
+                <p>You now have refined invitations for each role and stage. In Lesson 2.5 you will see how a real organisation, a War History Museum, built its story and designed inclusive journeys and you will test what you have drafted here against those lessons.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============ ACTIONS ============ -->
+    <div class="actions">
+        <button type="button" onclick="clearForm()">Clear Form</button>
+        <button type="button" class="primary" onclick="saveWorksheet()">Save Your Worksheet</button>
+        <button type="button" onclick="downloadPDF()">Download PDF</button>
+        <button type="button" onclick="window.print()">Print</button>
+    </div>
+
+    <!-- ============ FOOTER (WB2-G5) ============ -->
+    <div class="footer">
+        <div class="footer-content"><img src="form-footer-graphic.png" alt="" class="footer-graphic"></div>
+        <div class="footer-copyright">
+            MUVIST Academy &middot; Module 2 Workbook &middot; Lessons 2.1 to 2.4. &copy; 2026 MUVIST Ltd. All rights reserved. MUVIST&reg; Academy is a registered trademark of MUVIST Ltd. Course materials are the intellectual property of Paula Lain and Marshall Gill and may be reproduced by enrolled organisations for internal use only.
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    var KEY = 'muvist-form-mod2wb-';
+
+    function store(k, v) { try { localStorage.setItem(KEY + k, v); } catch (e) {} }
+    function read(k) { try { return localStorage.getItem(KEY + k); } catch (e) { return null; } }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('textarea[id], input[type="text"][id]').forEach(function (el) {
+            var v = read(el.id);
+            if (v !== null) el.value = v;
+            el.addEventListener('input', function () { store(el.id, el.value); });
+        });
+        document.querySelectorAll('input[type="checkbox"][id]').forEach(function (el) {
+            if (read(el.id) === 'true') el.checked = true;
+            el.addEventListener('change', function () { store(el.id, el.checked); });
+        });
+        document.querySelectorAll('input[type="radio"]').forEach(function (el) {
+            if (read(el.name) === el.value) el.checked = true;
+            el.addEventListener('change', function () { if (el.checked) store(el.name, el.value); });
+        });
+    });
+
+    function showToast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function () { t.classList.remove('show'); }, 3000);
+    }
+
+    function clearForm() {
+        if (confirm('Are you sure you want to clear all form data? This cannot be undone.')) {
+            try {
+                Object.keys(localStorage).forEach(function (k) { if (k.indexOf(KEY) === 0) localStorage.removeItem(k); });
+            } catch (e) {}
+            location.reload();
+        }
+    }
+
+    function saveWorksheet() { showToast('Your worksheet has been saved!'); }
+
+    function downloadPDF() {
+        var element = document.querySelector('.page');
+        var actions = document.querySelector('.actions');
+        actions.style.display = 'none';
+        var restore = function () { actions.style.display = ''; };
+        var opt = {
+            margin: [24, 24, 24, 24],
+            filename: 'MUVIST-Module-2-Workbook.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, windowWidth: 1240 },
+            /* A4 proportions at desktop width, so the page keeps its full layout; prints to A4 */
+            jsPDF: { unit: 'px', format: [1240, 1754], orientation: 'portrait', hotfixes: ['px_scaling'] },
+            pagebreak: { mode: ['css', 'legacy'], avoid: ['.rewrite', '.arc-card', 'tr', '.final-note', '.lesson-head', '.check-card', '.ref-card', '.audit-item', '.test-card', '.info-box', '.footer'] }
+        };
+        html2pdf().set(opt).from(element).save().then(restore, restore);
+    }
+</script>
+</body>
+</html>
